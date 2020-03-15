@@ -53,6 +53,7 @@ class LoginView(APIView):
                 if password == user_obj.password and user_obj.email == email:
                     data['token'] = serializer.get_token(user_obj)
                     data['username'] = user_obj.username 
+                    data['userId'] = user_obj.id
                     return Response(data, status = status.HTTP_200_OK)
                 else:
                     data['response'] = 'Incorrect email or password.'

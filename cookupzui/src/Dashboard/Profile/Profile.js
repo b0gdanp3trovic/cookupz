@@ -21,7 +21,7 @@ class Profile extends  React.Component {
 
     getUserInfo () {
         return new Promise(function (resolve, reject) {
-
+            
         })
     }
 

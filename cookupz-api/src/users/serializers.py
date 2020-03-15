@@ -39,3 +39,4 @@ class LoginSerializer(serializers.ModelSerializer):
         model = User
         fields = ['token', 'email', 'password']
         extra_kwargs = {'password' : {'write_only': True}}
+    
