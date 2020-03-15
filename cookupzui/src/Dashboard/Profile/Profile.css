@@ -1,0 +1,46 @@
+.containerProfile {
+    display: flex;
+    width: 100%;
+    margin-left: 200px;
+    position: fixed;
+}
+
+.userProfile {
+    margin-top: 2px;
+}
+
+.list-group-item {
+    background-color: darkorange;
+    color: white;
+}
+
+.userInfo{
+    flex: 1 1 auto;
+    height: 100%;
+    margin-top: 2px;
+    max-width: 80%;
+}
+
+.jumbotronProfile {
+    background-color: gray;
+}
+
+.text-center {
+    margin-right: 200px;
+    max-width: 80%;
+}
+
+.bio {
+    max-width: 80%
+}
+
+.bioHeader {
+    text-align: center;
+}
+
+.experienceItem{
+    background-color: white;
+    color: black;
+}
+
+

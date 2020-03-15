@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CoffeeScript File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1X8UNjsdBdVfG1Ba76tNCpf68Ls" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bogda\WebstormProjects\cookupzui\src\assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bogda\WebstormProjects\cookupzui\src\Dashboard" />
+      <recent name="C:\Users\bogda\WebstormProjects\cookupzui\src\AppBar\HeaderMain" />
+      <recent name="C:\Users\bogda\WebstormProjects\cookupzui\src\AppBar\HeaderW" />
+      <recent name="C:\Users\bogda\WebstormProjects\cookupzui\src\assets" />
+      <recent name="C:\Users\bogda\WebstormProjects\cookupzui\public" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.npm start">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="" />
+      <created>1580427176348</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580427176348</updated>
+      <workItem from="1580427179645" duration="134000" />
+      <workItem from="1581102285419" duration="4644000" />
+      <workItem from="1581876332918" duration="2030000" />
+      <workItem from="1581879200104" duration="24000" />
+      <workItem from="1581891210599" duration="8929000" />
+      <workItem from="1581976952923" duration="1009000" />
+      <workItem from="1582146491874" duration="3869000" />
+      <workItem from="1582265622858" duration="601000" />
+      <workItem from="1582578676888" duration="7647000" />
+      <workItem from="1582670488977" duration="8379000" />
+      <workItem from="1582731877958" duration="10713000" />
+      <workItem from="1582922013053" duration="15317000" />
+      <workItem from="1583002290443" duration="611000" />
+      <workItem from="1583101433082" duration="1918000" />
+      <workItem from="1583103412408" duration="1769000" />
+      <workItem from="1583106232179" duration="98000" />
+      <workItem from="1583106344851" duration="1069000" />
+      <workItem from="1583180804614" duration="612000" />
+      <workItem from="1583195101341" duration="139000" />
+      <workItem from="1583195257571" duration="24000" />
+      <workItem from="1583195307506" duration="1054000" />
+      <workItem from="1583311785347" duration="4433000" />
+      <workItem from="1583352523119" duration="1092000" />
+      <workItem from="1583362666905" duration="1092000" />
+      <workItem from="1583445081499" duration="1627000" />
+      <workItem from="1583788153267" duration="4387000" />
+      <workItem from="1583871016210" duration="7307000" />
+      <workItem from="1584035739994" duration="806000" />
+      <workItem from="1584124988682" duration="8849000" />
+      <workItem from="1584206188018" duration="13765000" />
+      <workItem from="1584233166950" duration="607000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="468" y="203" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582732702368">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="468" y="203" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1582732702368" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1581104457160">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581104457160" />
+    <state x="277" y="56" key="SettingsEditor" timestamp="1581876976609">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581876976609" />
+    <state x="577" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581894129001">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="577" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1581894129001" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1582736618855">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1582736618855" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1584223249479">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1584223249479" />
+  </component>
+</project>

@@ -1,0 +1,20 @@
+
+
+.container {
+    max-width: 320px;
+    margin-top: 75px;
+}
+
+.jumbotron {
+    background-color: #FFDC00;
+}
+
+.toastValid{
+    background-color: darkgreen;
+    color:white;
+}
+
+.toastInvalid{
+    background-color: orangered;
+    color: white;
+}

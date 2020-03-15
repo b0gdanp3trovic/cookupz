@@ -1,0 +1,28 @@
+* {
+    margin:0px;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+.sidebar{
+    position:fixed;
+    width: 200px;
+    height:100%;
+    background-color: #151719;
+    float: left;
+    overflow: hidden;
+}
+
+.sidebar ul li {
+    color:rgba(230, 230, 230, 0.9);
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+.sidebarLink{
+    color: white;
+}
+.sidebarLink:hover{
+    color: white;
+}

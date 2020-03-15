@@ -1,0 +1,21 @@
+
+
+@media all and (min-width: 480px) {
+    .wHeader{
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .wContainer{
+        width: 100%;
+    }
+
+    .logo {
+        width: 75px;
+        height: 75px;
+        display:block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top:30px
+    }
+}
