@@ -4,7 +4,7 @@ import {Form, Button, Toast} from "react-bootstrap";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import './Login.css'
 import axios from "axios";
-import {withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {AppContext} from "../contexts/AppContext";
 
 
@@ -38,6 +38,9 @@ function Login (props) {
                 setValidInfo(true);
                 setToastMessage(res.data.response);
                 setValue({currentUserId: res.data.currentUserId});
+                localStorage.setItem("currentUsername", res.data.username);
+                localStorage.setItem("token", res.data.token);
+                console.log(res.data.username);
                 props.history.push('/dashboard');
             }
         ).catch(
@@ -81,6 +84,9 @@ function Login (props) {
             <Toast  className={"toastInvalid"}>
                 <Toast.Body>{toastMessage}</Toast.Body>
             </Toast>}
+            <div className={"linkContainerRegister"}>
+                <Link to={"/register"} className={"registerLink"}>Don't have an account? Register here!</Link>
+            </div>
         </div>
 
     )

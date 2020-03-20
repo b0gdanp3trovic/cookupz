@@ -25,15 +25,19 @@ class RegistrationView(APIView):
         data = {}
         if serializer.is_valid():
             email = request.data['email']
+            username = request.data['username']
             if email != '':
                 email_list = User.objects.filter(email = email)
-                if not email_list:
+                username = User.objects.filter(username = username)
+                if not email_list and not username:
                     user = serializer.save()
                     Profile.objects.create(user = user, photo_url='', orders_count = 0, location = '', usual_wait = '', phone_number = '')
                     data['response'] = 'Successfully registered!'
                     data['email'] = user.email
+                    data['username'] = user.username
+                    return Response(data, status=status.HTTP_200_OK)
                 else:
-                    data['response'] = 'User with that email already exists.'
+                    data['response'] = 'User with that email or username already exists.'
                     return Response(data, status=status.HTTP_409_CONFLICT)
         else:
             data = serializer.errors

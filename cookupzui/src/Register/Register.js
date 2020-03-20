@@ -10,7 +10,8 @@ import {Link} from "react-router-dom";
 function Register(props) {
     const[email, setEmail] = useState("");
     const[firstName, setFirstName] = useState("");
-    const[lastName, setLastName] = useState("")
+    const[lastName, setLastName] = useState("");
+    const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
     const[dateOfBirth, setDateOfBirth] = useState("");
 
@@ -20,7 +21,7 @@ function Register(props) {
 
 
     function validateForm () {
-        return email.length > 0 && firstName.length > 0 && lastName.length > 0
+        return email.length > 0 && firstName.length > 0 && lastName.length > 0 && username.length > 0
             && password.length > 0 && dateOfBirth.length > 0;
     }
 
@@ -30,6 +31,7 @@ function Register(props) {
             email:email,
             firstname: firstName,
             lastname: lastName,
+            username: username,
             password: password,
             date_of_birth: dateOfBirth
         };
@@ -67,8 +69,8 @@ function Register(props) {
                         <Form.Control
                             autoFocus
                             placeholder={"Username"}
-                            value = {lastName}
-                            onChange = {e => setLastName(e.target.value)}
+                            value = {username}
+                            onChange = {e => setUsername(e.target.value)}
                         />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">

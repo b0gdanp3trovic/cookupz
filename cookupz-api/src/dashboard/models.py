@@ -8,9 +8,8 @@ class Profile(models.Model):
         on_delete = models.CASCADE,
         primary_key = True
     )
+    bio = models.TextField(blank = True)
     photo_url = models.TextField()
-    orders_count = models.IntegerField(blank = True)
     location = models.TextField(blank = True)
-    usual_wait = models.TextField(blank = True)
     phone_number = models.TextField(blank = True)
     

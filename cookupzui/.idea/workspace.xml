@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="" />
+    <list default="true" id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/users/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,7 +110,9 @@
       <workItem from="1584124988682" duration="8849000" />
       <workItem from="1584206188018" duration="13765000" />
       <workItem from="1584233166950" duration="607000" />
-      <workItem from="1584235290114" duration="817000" />
+      <workItem from="1584235290114" duration="1417000" />
+      <workItem from="1584478543385" duration="4679000" />
+      <workItem from="1584657999400" duration="5364000" />
     </task>
     <servers />
   </component>

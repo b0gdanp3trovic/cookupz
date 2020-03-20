@@ -10,7 +10,7 @@ from .serializers import ProfileSerializer
 class ProfileList(APIView):
 
     def get(self, request):
-        user_id = request.data.get('userId')
+        user_id = request.data.get('username')
         if(user_id):
             profile = Profile.objects.filter(user = user_id)
             serializer = ProfileSerializer(profile, many=True)

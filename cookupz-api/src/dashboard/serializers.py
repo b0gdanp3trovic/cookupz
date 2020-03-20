@@ -8,15 +8,14 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['user', 'photo_url', 'orders_count', 'location', 'usual_wait', 'phone_number']
+        fields = ['user', 'bio', 'photo_url', 'location', 'phone_number']
 
     def save(self):
         profile = Profile(
             user = self.validated_data('user'),
+            bio = self.validated_data('bio'),
             photo_url = self.validated_data('photo_url'),
-            orders_count = self.validated_data('orders_count'),
             location = self.validated_data('location'),
-            usual_wait = self.validated_data('usual_wait'),
             phone_number = self.validated_data('phone_number'),
         )
         profile.save()

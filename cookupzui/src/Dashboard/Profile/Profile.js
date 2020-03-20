@@ -7,33 +7,50 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
+import axios from "axios";
 
 
 class Profile extends  React.Component {
+
 
     constructor(props) {
         super(props);
         this.state = {
             userAuthenticated: false,
-            currentUser: {},
-        }
+            currentUsername: localStorage.getItem("currentUsername"),
+            token: localStorage.getItem("token")
+        };
+
+        this.user = {};
+
     }
 
-    getUserInfo () {
-        return new Promise(function (resolve, reject) {
-            
-        })
+     getUserInfo () {
+        const param = {
+            headers: {
+                "Authorization": "JWT " + this.state.token
+            },
+            username: this.state.currentUsername
+        };
+        return axios.get("http://localhost:8000/dashboard/profile", param);
     }
 
 
 
-    componentDidMount() {
-        const userId = this.props.currentUserId;
+    async componentDidMount() {
+        const profile = await this.getUserInfo();
+        this.setState({profile: profile.data[0]});
+        console.log(this.state);
     }
 
 
     render() {
+        if(!this.state.profile) {
+            return <div/>
+        }
+
         const wallpaper = require('../../assets/holder.jpg');
+        console.log(this.state.currentUsername);
 
         return (
             <div>
@@ -44,9 +61,9 @@ class Profile extends  React.Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Img variant="top" src={wallpaper} />
                             <Card.Body>
-                                <Card.Title>Bogdan Petrović</Card.Title>
+                                <Card.Title>{this.state.profile.user.firstname + " " + this.state.profile.user.lastname}</Card.Title>
                                 <Card.Text>
-                                    Najjači kuvar u ovom hoodu brt. Kuvam sve redom od paprika do kurvi.
+                                    Najjači kuvar u ovom hoodu brt.
                                 </Card.Text>
                             </Card.Body>
                             <div className={"actions"}>
@@ -64,19 +81,19 @@ class Profile extends  React.Component {
                             <Card.Body className="cardBody">
                                 <Card.Text>
                                     Radio kao kuvar kod am ama ispred grizlija i posvadjo se sa glavnim kuvarom
-                                    jer mi reko da nisam za kurac i evo sad trazim nekog da karam ovde.
+                                    jer mi reko da sam majmun i evo sad trazim.
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                        <Card className="bio">
+                        <Card tag={"div"} className="bio">
                             <Card.Header className={"bioHeader"}>Experience</Card.Header>
                             <Card.Body className="cardBody">
                                 <Card.Text>
                                     <ListGroup className={"experience"} variant="flush">
-                                        <ListGroup.Item className={"experienceItem"}>Arabika lmao</ListGroup.Item>
-                                        <ListGroup.Item className={"experienceItem"}>Am am</ListGroup.Item>
-                                        <ListGroup.Item className={"experienceItem"}>Grizli</ListGroup.Item>
-                                        <ListGroup.Item className={"experienceItem"}>Kurac</ListGroup.Item>
+                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Arabika lmao</ListGroup.Item>
+                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Am am</ListGroup.Item>
+                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Grizli</ListGroup.Item>
+                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Kurac</ListGroup.Item>
                                     </ListGroup>
                                 </Card.Text>
                             </Card.Body>
