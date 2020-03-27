@@ -3,16 +3,20 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Profile
 from .serializers import ProfileSerializer
+from django.contrib.auth.models import User
+
+
 
 # Create your views here.
 
 
 class ProfileList(APIView):
 
-    def get(self, request):
-        user_id = request.data.get('username')
-        if(user_id):
-            profile = Profile.objects.filter(user = user_id)
+    def get(self, request, username):
+        users = User.objects.filter(username = username)
+        user = users[0]
+        if(user):
+            profile = Profile.objects.filter(user = user.id)
             serializer = ProfileSerializer(profile, many=True)
             return Response(serializer.data)
         else:

@@ -8,6 +8,7 @@ import React, {useContext} from "react";
 import HeaderWelcome from "./AppBar/HeaderW/HeaderWelcome";
 import Header from "./AppBar/HeaderMain/Header";
 import {AppContext} from "./contexts/AppContext";
+import Offer from "./Dashboard/Offer/Offer";
 
 
 export default function Routing(props){
@@ -28,6 +29,7 @@ export default function Routing(props){
         <div>
             <Switch>
                 <PropsRoute exact path = '/' component={Welcome} header={welcomeHeader()}/>
+                <PropsRoute exact path = '/offer' component = {Offer} header = {mainPageHeader()}/>
                 <PropsRoute exact path ='/register' component = {Register} header={welcomeHeader()}/>
                 <PropsRoute exact path ='/dashboard' component = {Dashboard} header={mainPageHeader()}/>
                 <PropsRoute exact path = '/profile/:id' context = {value} component = {Profile} header = {mainPageHeader()}/>

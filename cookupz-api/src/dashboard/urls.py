@@ -9,5 +9,5 @@ app_name = "dashboard"
 
 
 urlpatterns = [
-  path('profile', ProfileList.as_view())
+  path('profile/<username>', ProfileList.as_view())
 ]

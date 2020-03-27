@@ -42,11 +42,24 @@ function Login (props) {
             };
             localStorage.setItem("access", res.data.access);
             localStorage.setItem("refresh", res.data.refresh);
-            return axios.get('http://localhost:8000/users/currentUser', logParamWithToken);
-        }).then(res => {
-            localStorage.setItem("user", res.data);
-            localStorage.setItem("currentUsername", res.data.username);
-            props.history.push('/dashboard')
+            return axios.get('http://localhost:8000/users/currentUser', logParamWithToken).then(res => {
+                localStorage.setItem("user", JSON.stringify(res.data));
+                localStorage.setItem("currentUsername", res.data.username);
+                props.history.push('/dashboard')
+            }).catch(
+                error => {
+                    setAttemptedLogin(true);
+                    setValidInfo(false);
+                    if(error.response && error.response.data.response){
+                        setToastMessage(error.response.data.response);
+                    } else if(error.response.status === 401) {
+                        setToastMessage(error.response.data.detail);
+                    }
+                    else {
+                        setToastMessage("Network error.")
+                    }
+                }
+            )
         })
 
         //axios.post('http://localhost:8000/users/login', logParam).then(

@@ -18,6 +18,8 @@ class Profile extends  React.Component {
         this.state = {
             userAuthenticated: false,
             token: localStorage.getItem("access"),
+            currentUsername: localStorage.getItem("currentUsername"),
+            user: JSON.parse(localStorage.getItem("user")),
             editMode: false,
             myProfile: false
         };
@@ -29,11 +31,10 @@ class Profile extends  React.Component {
      getUserInfo () {
         const param = {
             headers: {
-                "Authorization": "Bearer " + this.state.token
+                "Authorization": "Bearer " + localStorage.getItem("access")
             },
-            username: this.state.currentUsername
         };
-        return axios.get("http://localhost:8000/dashboard/profile", param);
+        return axios.get("http://localhost:8000/dashboard/profile/" + this.state.currentUsername, param);
     }
 
 
@@ -41,19 +42,49 @@ class Profile extends  React.Component {
     async componentDidMount() {
         const profile = await this.getUserInfo();
         this.setState({profile: profile.data[0]});
-        if(localStorage.getItem("currentUsername") === this.state.profile.user.username) {
+        if(localStorage.getItem("currentUsername") === this.state.user.username) {
             this.setState({myProfile: true});
         }
     }
 
 
-    render() {
 
+    renderPhoto () {
+        const wallpaper = require('../../assets/holder.jpg');
+        const addImage = require('../../assets/add_image.jpg');
+        if(this.state.myProfile) {
+            if(this.state.profile.photo) {
+                return  (<Card.Img variant="top" src={wallpaper} />);
+            } else if (this.state.editMode) {
+                return (<Card className={"noPhotoCard"}><Button className={"addPhotoButton"}
+                                                                variant="secondary">Add image</Button>{' '}</Card>)
+            } else {
+                return (<Card className={"noPhotoCard"}><div>No photo added.</div></Card>)
+            }
+        }
+    }
+
+    renderBio() {
+        const addButton = require('../../assets/add-button.png');
+        if(this.state.myProfile) {
+            if(this.state.profile.bio) {
+                return(<div>{this.state.profile.bio}</div>)
+            } else if (this.state.editMode) {
+                return (<div className={"addButton"}><img className={"addButton"} src={addButton}/></div>)
+            } else {
+                return (<div>No bio added.</div>)
+            }
+        }
+    }
+
+    render() {
         if(!this.state.profile) {
             return <div/>
         }
 
-        const wallpaper = require('../../assets/holder.jpg');
+        const addButton = require('../../assets/add-button.png');
+
+
 
         return (
             <div>
@@ -62,16 +93,20 @@ class Profile extends  React.Component {
                 <div className={"containerProfile"}>
                     <div className={"userProfile"}>
                         <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={wallpaper} />
+                            {this.renderPhoto()}
                             <Card.Body>
-                                <Card.Title>{this.state.profile.user.firstname + " " + this.state.profile.user.lastname}</Card.Title>
+                                <Card.Title>{this.state.user.first_name + " " + this.state.user.last_name}</Card.Title>
                                 <Card.Text>
                                     Najjači kuvar u ovom hoodu brt.
                                 </Card.Text>
                             </Card.Body>
                             <div className={"actions"}>
                                 <ListGroup className="list-group-flush">
-                                    {this.state.myProfile && <ListGroupItem action onClick={ () => {this.setState({editMode: true})}}>Edit profile</ListGroupItem>}
+                                    {this.state.myProfile && <ListGroupItem action onClick={ () => {this.setState({editMode: !this.state.editMode})}}>
+                                        {this.state.editMode ?
+                                             (<div>Done</div>) :   (<div>Edit profile</div>)
+                                        }
+                                    </ListGroupItem>}
                                     {!this.state.myProfile && <ListGroupItem action>Message</ListGroupItem>}
                                     {!this.state.myProfile && <ListGroupItem action>Invite to a cookup</ListGroupItem>}
                                     {!this.state.myProfile && <ListGroupItem action>Block Bogdan</ListGroupItem>}
@@ -84,20 +119,22 @@ class Profile extends  React.Component {
                             <Card.Header className={"bioHeader"}>Bio</Card.Header>
                             <Card.Body className="cardBody">
                                 <Card.Text>
-                                    Radio kao kuvar kod am ama ispred grizlija i posvadjo se sa glavnim kuvarom
-                                    jer mi reko da sam majmun i evo sad trazim.
+                                    {this.renderBio()}
                                 </Card.Text>
                             </Card.Body>
                         </Card>
                         <Card tag={"div"} className="bio">
                             <Card.Header className={"bioHeader"}>Experience</Card.Header>
-                            <Card.Body className="cardBody">
+                            <Card.Body className="cardBodyXp">
                                 <Card.Text>
                                     <ListGroup className={"experience"} variant="flush">
                                         <ListGroup.Item tag={"div"} className={"experienceItem"}>Arabika lmao</ListGroup.Item>
                                         <ListGroup.Item tag={"div"} className={"experienceItem"}>Am am</ListGroup.Item>
                                         <ListGroup.Item tag={"div"} className={"experienceItem"}>Grizli</ListGroup.Item>
                                         <ListGroup.Item tag={"div"} className={"experienceItem"}>Kurac</ListGroup.Item>
+                                        {this.state.editMode && <ListGroup.Item tag={"div"} className={"experienceItemAdd"}>
+                                            <div className={"addButton"}><img className={"addButton"} src={addButton}/></div>
+                                        </ListGroup.Item>}
                                     </ListGroup>
                                 </Card.Text>
                             </Card.Body>

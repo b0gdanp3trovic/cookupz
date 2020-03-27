@@ -38,9 +38,40 @@
     text-align: center;
 }
 
-.experienceItem{
+
+
+.noPhotoCard {
+    width: 286px;
+    height: 193px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addPhotoButton {
+    width: 50%;
+    vertical-align: center;
+    horiz-align: center;
+}
+
+.cardBody{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addButton {
+    width: 35px;
+    height: 35px;
+}
+
+.experienceItem, .experienceItemAdd{
     background-color: white;
     color: black;
 }
-
+.experienceItemAdd{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
