@@ -29,11 +29,10 @@ function Register(props) {
         e.preventDefault();
         const regParam = {
             email:email,
-            firstname: firstName,
-            lastname: lastName,
+            first_name: firstName,
+            last_name: lastName,
             username: username,
             password: password,
-            date_of_birth: dateOfBirth
         };
         console.log(regParam);
         axios.post('http://localhost:8000/users/register', regParam).then(
@@ -79,14 +78,6 @@ function Register(props) {
                             placeholder={"Email"}
                             value = {email}
                             onChange = {e => setEmail(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Control
-                            autoFocus
-                            placeholder={"Date of birth"}
-                            value = {dateOfBirth}
-                            onChange = {e => setDateOfBirth(e.target.value)}
                         />
                     </Form.Group>
                     <Form.Group  >

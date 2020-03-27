@@ -2,11 +2,12 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from .models import User
+from django.contrib.auth.models import User
 from .serializers import RegisterSerializer, LoginSerializer
 from dashboard.serializers import ProfileSerializer
 from dashboard.models import Profile
 from rest_framework import permissions, status
+
 
 
 @api_view(['GET', ])
@@ -30,11 +31,9 @@ class RegistrationView(APIView):
                 email_list = User.objects.filter(email = email)
                 username = User.objects.filter(username = username)
                 if not email_list and not username:
-                    user = serializer.save()
-                    Profile.objects.create(user = user, photo_url='', orders_count = 0, location = '', usual_wait = '', phone_number = '')
+                    print(request.data)
+                    serializer.save()
                     data['response'] = 'Successfully registered!'
-                    data['email'] = user.email
-                    data['username'] = user.username
                     return Response(data, status=status.HTTP_200_OK)
                 else:
                     data['response'] = 'User with that email or username already exists.'
@@ -55,7 +54,6 @@ class LoginView(APIView):
             user_obj = User.objects.filter(email = email).first()
             if email and password and user_obj:
                 if password == user_obj.password and user_obj.email == email:
-                    data['token'] = serializer.get_token(user_obj)
                     data['username'] = user_obj.username 
                     data['userId'] = user_obj.id
                     return Response(data, status = status.HTTP_200_OK)
@@ -67,6 +65,7 @@ class LoginView(APIView):
         else:
             data['response'] = 'Wrong login credentials.'
         return Response(data, status = status.HTTP_400_BAD_REQUEST)
+
 
 
 

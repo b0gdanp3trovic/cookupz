@@ -17,8 +17,9 @@ class Profile extends  React.Component {
         super(props);
         this.state = {
             userAuthenticated: false,
-            currentUsername: localStorage.getItem("currentUsername"),
-            token: localStorage.getItem("token")
+            token: localStorage.getItem("token"),
+            editMode: false,
+            myProfile: false
         };
 
         this.user = {};
@@ -40,17 +41,19 @@ class Profile extends  React.Component {
     async componentDidMount() {
         const profile = await this.getUserInfo();
         this.setState({profile: profile.data[0]});
-        console.log(this.state);
+        if(localStorage.getItem("currentUsername") === this.state.profile.user.username) {
+            this.setState({myProfile: true});
+        }
     }
 
 
     render() {
+
         if(!this.state.profile) {
             return <div/>
         }
 
         const wallpaper = require('../../assets/holder.jpg');
-        console.log(this.state.currentUsername);
 
         return (
             <div>
@@ -68,9 +71,10 @@ class Profile extends  React.Component {
                             </Card.Body>
                             <div className={"actions"}>
                                 <ListGroup className="list-group-flush">
-                                    <ListGroupItem action>Message</ListGroupItem>
-                                    <ListGroupItem action>Invite to a cookup</ListGroupItem>
-                                    <ListGroupItem action>Block Bogdan</ListGroupItem>
+                                    {this.state.myProfile && <ListGroupItem action onClick={ () => {this.setState({editMode: true})}}>Edit profile</ListGroupItem>}
+                                    {!this.state.myProfile && <ListGroupItem action>Message</ListGroupItem>}
+                                    {!this.state.myProfile && <ListGroupItem action>Invite to a cookup</ListGroupItem>}
+                                    {!this.state.myProfile && <ListGroupItem action>Block Bogdan</ListGroupItem>}
                                 </ListGroup>
                             </div>
                         </Card>
