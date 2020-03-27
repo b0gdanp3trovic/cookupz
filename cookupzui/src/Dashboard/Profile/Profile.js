@@ -17,7 +17,7 @@ class Profile extends  React.Component {
         super(props);
         this.state = {
             userAuthenticated: false,
-            token: localStorage.getItem("token"),
+            token: localStorage.getItem("access"),
             editMode: false,
             myProfile: false
         };
@@ -29,7 +29,7 @@ class Profile extends  React.Component {
      getUserInfo () {
         const param = {
             headers: {
-                "Authorization": "JWT " + this.state.token
+                "Authorization": "Bearer " + this.state.token
             },
             username: this.state.currentUsername
         };

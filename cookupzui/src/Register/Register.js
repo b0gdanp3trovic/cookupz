@@ -13,7 +13,6 @@ function Register(props) {
     const[lastName, setLastName] = useState("");
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
-    const[dateOfBirth, setDateOfBirth] = useState("");
 
     console.log(props);
 
@@ -22,11 +21,14 @@ function Register(props) {
 
     function validateForm () {
         return email.length > 0 && firstName.length > 0 && lastName.length > 0 && username.length > 0
-            && password.length > 0 && dateOfBirth.length > 0;
+            && password.length > 0;
     }
 
     function handleSubmit(e){
         e.preventDefault();
+        if(!validateForm()){
+            return;
+        }
         const regParam = {
             email:email,
             first_name: firstName,
@@ -39,7 +41,9 @@ function Register(props) {
             res => {
                 props.history.push('/');
             }
-        )
+        ).catch(error => {
+            console.log(error);
+        })
     }
 
     return (

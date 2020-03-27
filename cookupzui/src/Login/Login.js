@@ -10,7 +10,7 @@ import {AppContext} from "../contexts/AppContext";
 
 
 function Login (props) {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [validInfo, setValidInfo] = useState();
     const [toastMessage, setToastMessage] = useState("");
@@ -18,7 +18,7 @@ function Login (props) {
     const {value, setValue} = useContext(AppContext);
 
     let validateForm = e => {
-        return email.length > 0 && password.length > 0;
+        return username.length > 0 && password.length > 0;
     };
 
     let handleSubmit = e => {
@@ -30,30 +30,46 @@ function Login (props) {
             return;
         }
         const logParam = {
-            email: email,
-            password: password
+            username: username,
+            password: password,
         };
-        axios.post('http://localhost:8000/users/login', logParam).then(
-            res => {
-                setValidInfo(true);
-                setToastMessage(res.data.response);
-                setValue({currentUserId: res.data.currentUserId});
-                localStorage.setItem("currentUsername", res.data.username);
-                localStorage.setItem("token", res.data.token);
-                console.log(res.data.username);
-                props.history.push('/dashboard');
-            }
-        ).catch(
-            error => {
-                setAttemptedLogin(true);
-                setValidInfo(false);
-                if(error.response && error.response.data.response){
-                    setToastMessage(error.response.data.response);
-                } else {
-                    setToastMessage("Network error.")
-                }
-            }
-        )
+        axios.post('http://localhost:8000/users/token/obtain', logParam).then(res => {
+            const logParamWithToken = {
+                username: username,
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("access")
+                },
+            };
+            localStorage.setItem("access", res.data.access);
+            localStorage.setItem("refresh", res.data.refresh);
+            return axios.get('http://localhost:8000/users/currentUser', logParamWithToken);
+        }).then(res => {
+            localStorage.setItem("user", res.data);
+            localStorage.setItem("currentUsername", res.data.username);
+            props.history.push('/dashboard')
+        })
+
+        //axios.post('http://localhost:8000/users/login', logParam).then(
+        //    res => {
+        //        setValidInfo(true);
+        //        setToastMessage(res.data.response);
+        //        setValue({currentUserId: res.data.currentUserId});
+        //        localStorage.setItem("currentUsername", res.data.username);
+        //        localStorage.setItem("token", res.data.token);
+        //        console.log(res.data.username);
+        //        props.history.push('/dashboard');
+        //    }
+        //).catch(
+        //    error => {
+        //        setAttemptedLogin(true);
+        //        setValidInfo(false);
+        //        if(error.response && error.response.data.response){
+        //            setToastMessage(error.response.data.response);
+        //        } else {
+        //            setToastMessage("Network error.")
+        //        }
+        //    }
+        //)
     };
 
     return (
@@ -62,9 +78,9 @@ function Login (props) {
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Control
-                            placeholder = {"Email"}
-                            value = {email}
-                            onChange = {e => setEmail(e.target.value)}
+                            placeholder = {"Username"}
+                            value = {username}
+                            onChange = {e => setUsername(e.target.value)}
                         />
                     </Form.Group>
                     <Form.Group>
