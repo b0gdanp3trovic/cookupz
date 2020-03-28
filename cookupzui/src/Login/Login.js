@@ -34,14 +34,14 @@ function Login (props) {
             password: password,
         };
         axios.post('http://localhost:8000/users/token/obtain', logParam).then(res => {
+            localStorage.setItem("access", res.data.access);
+            localStorage.setItem("refresh", res.data.refresh);
             const logParamWithToken = {
                 username: username,
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("access")
                 },
             };
-            localStorage.setItem("access", res.data.access);
-            localStorage.setItem("refresh", res.data.refresh);
             return axios.get('http://localhost:8000/users/currentUser', logParamWithToken).then(res => {
                 localStorage.setItem("user", JSON.stringify(res.data));
                 localStorage.setItem("currentUsername", res.data.username);
@@ -87,7 +87,7 @@ function Login (props) {
 
     return (
         <div className={"container"}>
-            <Jumbotron className={"jumbotron"}>
+            <Jumbotron className={"lJumbotron"}>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Control

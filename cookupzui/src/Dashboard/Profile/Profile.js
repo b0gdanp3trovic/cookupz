@@ -8,6 +8,7 @@ import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
+import checkTokenService from "../../checkToken";
 
 
 class Profile extends  React.Component {
@@ -29,22 +30,29 @@ class Profile extends  React.Component {
     }
 
      getUserInfo () {
-        const param = {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("access")
-            },
-        };
-        return axios.get("http://localhost:8000/dashboard/profile/" + this.state.currentUsername, param);
+        const accessToken = localStorage.getItem("access");
+        return checkTokenService.validateToken(accessToken).then(res => {
+            const param = {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("access")
+                },
+            };
+            axios.get("http://localhost:8000/dashboard/profile/" + this.state.currentUsername, param).then(res => {
+                if(res.data[0]){
+                    this.setState({profile: res.data[0]});
+                }
+            })
+        })
     }
 
 
 
     async componentDidMount() {
-        const profile = await this.getUserInfo();
-        this.setState({profile: profile.data[0]});
-        if(localStorage.getItem("currentUsername") === this.state.user.username) {
-            this.setState({myProfile: true});
-        }
+        this.getUserInfo().then(res => {
+            if(localStorage.getItem("currentUsername") === this.state.user.username) {
+                this.setState({myProfile: true});
+            }
+        })
     }
 
 

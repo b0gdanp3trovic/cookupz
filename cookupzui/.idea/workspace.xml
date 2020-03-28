@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/cookupz_api/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/cookupz_api/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/dashboard/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/dashboard/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/dashboard/migrations/0002_auto_20200327_0840.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/users/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/users/serializers.py" afterDir="false" />
-    </list>
+    <list default="true" id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,7 +113,8 @@
       <workItem from="1584657999400" duration="5540000" />
       <workItem from="1585218542596" duration="3624000" />
       <workItem from="1585237675707" duration="1921000" />
-      <workItem from="1585284483239" duration="19079000" />
+      <workItem from="1585284483239" duration="22609000" />
+      <workItem from="1585389898995" duration="3711000" />
     </task>
     <servers />
   </component>
