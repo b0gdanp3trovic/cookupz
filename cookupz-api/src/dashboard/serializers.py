@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from dashboard.models import Profile, Offer
-from users.serializers import RegisterSerializer
+from users.serializers import RegisterSerializer, UserDTOSerializer
 
 class ProfileSerializer(serializers.ModelSerializer):
     user = RegisterSerializer(required = True)
@@ -26,5 +26,12 @@ class OfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
         fields = ['user', 'int_users', 'chosen_user', 'description', 'location', 'tag']
+
+class OfferSerializerWithUser(serializers.ModelSerializer):
+    user = UserDTOSerializer(read_only=True)
+    class Meta:
+        model = Offer
+        fields = ['user', 'int_users', 'chosen_user', 'description', 'location', 'tag']
+
 
 

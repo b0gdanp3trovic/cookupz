@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+
+.postWrapper {
+    margin-top: 20px;
+}
+
+.postsContent{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+}
+
+.post .list-group-item{
+    background-color: white;
+    color: black;
+    padding: 0px;
+}
+
+.location{
+    font-size: 14px;
+    float: right;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.postWrapper .card-body{
+    padding: 0;
+    max-width: 500px;
+}
+
+.postWrapper{
+    margin-top: 40px;
+}
+
+.postOverlay {
+    margin-top: 30px;
+}
+
+.postOverlay:last-child{
+    margin-bottom: 30px;
+}
+
+.description{
+    margin-left:10px;
+    margin-bottom: 0px;
+}
+
+.upperPart{
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+}
+
+.name {
+    margin-left: 20px;
+    margin-top:30px;
+    font-size: 15px;
+}
+
+.textContainerGray{
+    padding-top: 10px;
+    background-color: #e9ecef;
+}
+
+.textContainerWhite {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: white;
+}
+
+.photoWrapper{
+    width: 75px;
+    height: 75px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+
+.jumb{
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+.buttons{
+    max-width: 100%;
+    text-align: center;
+    background-color: #e9ecef;
+    padding-bottom: 7px;
+}
+
+.button{
+    align-self: center;
+}
+
+.linkToProfile, .linkToProfile:hover{
+    color: black;
+}
+
+
+
+

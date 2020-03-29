@@ -3,6 +3,8 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.validators import UnicodeUsernameValidator
+
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -21,5 +23,19 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'first_name', 'last_name', 'username']
+
+
+class UserDTOSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'username']
+        
+        extra_kwargs = {
+            'username': {
+                'validators': [UnicodeUsernameValidator()],
+            }
+        }
+
+
 
     

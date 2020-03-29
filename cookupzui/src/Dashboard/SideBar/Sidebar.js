@@ -6,7 +6,6 @@ import {AppContext} from "../../contexts/AppContext";
 class Sidebar extends React.Component {
     static context = AppContext;
     componentDidMount() {
-        console.log(this.context.currentUserId);
         this.setState({currentUsername: localStorage.getItem("currentUsername")});
     }
 

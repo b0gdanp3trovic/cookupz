@@ -7,10 +7,11 @@ import {Form, Toast} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import checkTokenService from "../../checkToken";
+import {withRouter} from "react-router-dom";
 
 
 
-export default function Offer (props){
+function Offer (props){
 
         const [description, setDescription] = useState('');
         const [location, setLocation] = useState('');
@@ -26,7 +27,7 @@ export default function Offer (props){
         }
 
         function validateInput(params){
-            return params.description !== null && params.description !== undefined;
+            return params.description.length > 0
         }
 
         function postOffer(){
@@ -49,7 +50,7 @@ export default function Offer (props){
                         "Authorization": "Bearer " + localStorage.getItem("access")
                     },
                 }).then(res => {
-                    console.log(res);
+                    props.history.push('/dashboard');
                 })
             })
         }
@@ -61,42 +62,46 @@ export default function Offer (props){
                 <Sidebar/>
 
                 <div className={"offerWrapper"}>
-                    <Jumbotron className={"offerJumbotron"}>
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <Form.Control
-                                    placeholder = {"Describe your offer"}
-                                    value = {description}
-                                    onChange = {e => setDescription(e.target.value)}
-                                    as="textarea"
-                                    rows="3" />
-                            </Form.Group>
-                            <Form.Row>
-                                <Form.Group as = {Col}>
+                    <div className={"offerOverlay"}>
+                        <Jumbotron className={"offerJumbotron"}>
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group controlId="exampleForm.ControlTextarea1">
                                     <Form.Control
-                                        placeholder = {"Location:"}
-                                        value = {location}
-                                        onChange = {e => setLocation(e.target.value)}
-                                    />
+                                        placeholder = {"Describe your offer"}
+                                        value = {description}
+                                        onChange = {e => setDescription(e.target.value)}
+                                        as="textarea"
+                                        rows="3" />
                                 </Form.Group>
-                                <Form.Group as = {Col}>
-                                    <Form.Control
-                                        placeholder = {"Tag:"}
-                                        value = {tag}
-                                        onChange = {e => setTag(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Form.Row>
-                            <Button className={"btn-danger"} block  type="submit" >
-                                Submit
-                            </Button>
-                        </Form>
-                    </Jumbotron>
+                                <Form.Row>
+                                    <Form.Group as = {Col}>
+                                        <Form.Control
+                                            placeholder = {"Location (optional):"}
+                                            value = {location}
+                                            onChange = {e => setLocation(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group as = {Col}>
+                                        <Form.Control
+                                            placeholder = {"Tag (optional):"}
+                                            value = {tag}
+                                            onChange = {e => setTag(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                </Form.Row>
+                                <Button className={"btn-danger"} block  type="submit" >
+                                    Submit
+                                </Button>
+                            </Form>
+                        </Jumbotron>
+                    </div>
                     {isInvalid &&
-                    <Toast  className={"toastInvalid"}>
+                    <Toast  className={"toastInvOffer"}>
                         <Toast.Body>{toastMessage}</Toast.Body>
                     </Toast>}
                 </div>
             </div>
         )
 }
+
+export default withRouter(Offer);

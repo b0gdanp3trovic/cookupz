@@ -50,6 +50,7 @@ class Profile extends  React.Component {
     async componentDidMount() {
         this.getUserInfo().then(res => {
             if(localStorage.getItem("currentUsername") === this.state.user.username) {
+                console.log('yes')
                 this.setState({myProfile: true});
             }
         })

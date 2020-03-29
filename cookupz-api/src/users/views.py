@@ -33,7 +33,6 @@ class RegistrationView(APIView):
                 email_list = User.objects.filter(email = email)
                 username = User.objects.filter(username = username)
                 if not email_list and not username:
-                    print(request.data)
                     user = serializer.save()
                     profile = Profile(user = user, bio= '', photo_url='', location = '', phone_number = '')
                     profile.save()

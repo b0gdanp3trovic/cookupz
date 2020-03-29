@@ -3,5 +3,16 @@
 .offerWrapper{
     margin-left: 500px;
     width: 700px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.offerOverlay{
     margin-top: 100px;
+}
+.toastInvOffer{
+    background-color: orangered;
+    color: white;
+    align-self: center;
 }

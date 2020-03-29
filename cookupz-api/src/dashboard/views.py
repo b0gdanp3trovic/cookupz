@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .models import Profile
-from .serializers import ProfileSerializer, OfferSerializer
+from .models import Profile, Offer
+from .serializers import ProfileSerializer, OfferSerializer, UserDTOSerializer, OfferSerializerWithUser
 from django.contrib.auth.models import User
 
 
@@ -38,6 +38,14 @@ class OfferView(APIView):
             return Response(serializer.data, status = status.HTTP_200_OK)
         else: 
             return Response(data = serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request):
+        data = Offer.objects.all()
+        serializer = OfferSerializerWithUser(data, many=True)
+        if(serializer.is_valid):
+            return Response(data = serializer.data, status = status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 

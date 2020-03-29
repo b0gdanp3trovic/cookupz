@@ -12,6 +12,8 @@
     height: 50px;
     display: block;
     background-color: #151719;
+    position: fixed;
+    z-index: 2;
 }
 
 .innerHeader {
@@ -61,4 +63,11 @@
     font-family: 'Montserrat';
     font-size: 15px;
 }
+
+.logoutLink, .logoutLink:hover{
+    margin-top: 15px;
+    color: white;
+}
+
+
 
