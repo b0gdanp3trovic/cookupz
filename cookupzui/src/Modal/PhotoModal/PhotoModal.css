@@ -1,0 +1,11 @@
+.uploadButton{
+    float: left;
+}
+
+.modal-footer {
+    justify-content: space-between;
+}
+
+.doneButton {
+    float: right;
+}
