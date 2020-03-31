@@ -5,6 +5,10 @@ from rest_framework import status
 from .models import Profile, Offer
 from .serializers import ProfileSerializer, OfferSerializer, UserDTOSerializer, OfferSerializerWithUser
 from django.contrib.auth.models import User
+import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 
@@ -24,6 +28,21 @@ class ProfileList(APIView):
             profiles = Profile.objects.all()
             serializer = ProfileSerializer(profiles, many=True)
             return Response(serializer.data)
+
+class ProfilePhotoView(APIView):
+    def post(self, request, username):
+        cloudinary.config( 
+            cloud_name = os.environ['CLOUDINARY_NAME'], 
+            api_key = os.environ['CLOUDINARY_API_KEY'], 
+            api_secret = os.environ['CLOUDINARY_API_SECRET'] 
+        )
+        response = cloudinary.uploader.upload(request.data['image'])
+        user = User.objects.filter(username=username)[0]
+        profile = Profile.objects.filter(user_id = user.id)
+        profile.update(photo_url = response['url'])
+        profile_serializer = ProfileSerializer(profile[0])
+        #profile.update(photo_url = response['url'])
+        return Response(data=profile_serializer.data, status=status.HTTP_200_OK)
 
 
 class OfferView(APIView):
