@@ -41,7 +41,7 @@ function Dashboard (props) {
                 <div className={"postsContent"}>
                     <div className={"postWrapper"}>
                     {state.map((item, i) => {
-                        const link = "/profile/" + item.user.username;
+                        const link = "/profile/" + item.profile.user.username;
                         return (
                             <div key={i} className={"postOverlay"}>
                                 <Card body className={"cardBody"}>
@@ -51,11 +51,11 @@ function Dashboard (props) {
                                                     <ListGroup.Item >
                                                         <div className={"upperPart"}>
                                                             <div className={"photoWrapper"}>
-                                                                <Card.Img  src={wallpaper} />
+                                                                <Card.Img  src={item.profile.photo_url} />
                                                             </div>
                                                             <div className={"name"}>
-                                                                <Link to={"/profile/" + item.user.username} className={"linkToProfile"} >
-                                                                    {item.user.first_name} {item.user.last_name}
+                                                                <Link to={"/profile/" + item.profile.user.username} className={"linkToProfile"} >
+                                                                    {item.profile.user.first_name} {item.profile.user.last_name}
                                                                 </Link>
                                                             </div>
                                                         </div>

@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 class Profile(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.OneToOneField(
         User,
         on_delete = models.CASCADE,
-        primary_key = True
     )
     bio = models.TextField(blank = True)
     my_name=models.TextField(blank=True)
@@ -17,6 +17,10 @@ class Offer(models.Model):
     user = models.ForeignKey(
         User,
         on_delete = models.CASCADE,
+    )
+    profile = models.ForeignKey(
+        Profile,
+        on_delete = models.CASCADE
     )
     int_users = models.ManyToManyField(User, related_name='int_offers',default=None, blank=True, null=True)
     chosen_user = models.OneToOneField(User, related_name='chosen_offer', on_delete = models.CASCADE, default=None, blank=True, null=True)

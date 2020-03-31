@@ -5,6 +5,7 @@ import {Card} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
+import Form from 'react-bootstrap/Form'
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
@@ -16,7 +17,6 @@ class Profile extends  React.Component {
 
 
     constructor(props) {
-        console.log(props.match.params.id)
         super(props);
         this.handleClose = this.handleClose.bind(this);
         this.state = {
@@ -27,12 +27,20 @@ class Profile extends  React.Component {
             editMode: false,
             myProfile: false,
             profileUsername: props.match.params.id,
-            showPhotoModal: false
+            showPhotoModal: false,
+            photoUploaded: false,
+            location: ''
         };
 
+        this.location = '';
+
         this.user = {};
+        this.getUserInfo = this.getUserInfo.bind(this);
+        this.updateProfile = this.updateProfile.bind(this);
+        this.locationOnChange = this.locationOnChange.bind(this);
 
     }
+
 
      getUserInfo () {
         const accessToken = localStorage.getItem("access");
@@ -42,9 +50,11 @@ class Profile extends  React.Component {
                     "Authorization": "Bearer " + localStorage.getItem("access")
                 },
             };
+            console.log(this.state);
             axios.get("http://localhost:8000/dashboard/profile/" + this.state.profileUsername, param).then(res => {
                 if(res.data[0]){
                     this.setState({profile: res.data[0]});
+                    this.setState({location: res.data[0].location});
                 }
             })
         })
@@ -55,7 +65,6 @@ class Profile extends  React.Component {
     async componentDidMount() {
         this.getUserInfo().then(res => {
             if(localStorage.getItem("currentUsername") === this.state.profileUsername) {
-                console.log('yes')
                 this.setState({myProfile: true});
             }
         })
@@ -67,8 +76,18 @@ class Profile extends  React.Component {
         const wallpaper = require('../../assets/holder.jpg');
         const addImage = require('../../assets/add_image.jpg');
         if(this.state.myProfile) {
-            if(this.state.profile.photo) {
-                return  (<Card.Img variant="top" src={wallpaper} />);
+            if(this.state.profile.photo_url) {
+                if(this.state.editMode){
+                    return (<div className={"changePhotoContainer"}>
+                            <Card.Img className={"profilePic"} variant="top" src={this.state.profile.photo_url}>
+                            </Card.Img>
+                            <Button onClick={this.handleClose}  className={"changePhotoButton"}
+                                                                    variant="secondary">Change image</Button>{' '}
+                        </div>
+                    )
+                } else {
+                    return  (<Card.Img className={"profilePic"} variant="top" src={this.state.profile.photo_url} />);
+                }
             } else if (this.state.editMode) {
                 return (<Card className={"noPhotoCard"}><Button onClick={this.handleClose}  className={"addPhotoButton"}
                                                                 variant="secondary">Add image</Button>{' '}</Card>)
@@ -76,11 +95,68 @@ class Profile extends  React.Component {
                 return (<Card className={"noPhotoCard"}><div>No photo added.</div></Card>)
             }
         } else {
-            if(this.state.profile.photo) {
-                return (<Card.Img variant = "top" src = {wallpaper} />);
+            if(this.state.profile.photo_url) {
+                return (<Card.Img className={"profilePic"} variant = "top" src = {this.state.profile.photo_url} />);
             } else {
                 return (<Card className={"noPhotoCard"}><div>No photo added.</div></Card>)
             }
+        }
+    }
+
+    locationOnChange(e) {
+        const newName = e.target.value
+    }
+
+    updateProfile(){
+
+        const accessToken = localStorage.getItem("access");
+        return checkTokenService.validateToken(accessToken).then(res => {
+            const param = {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("access")
+                },
+            };
+            axios.put('http://localhost:8000/dashboard/profileedit/' + this.state.profile.id, this.state.profile, {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("access")
+                }
+            }).then(res => {
+                    console.log(res);
+            })
+
+        })
+
+    }
+
+    renderLocation(){
+        const addButton = require('../../assets/add-button.png');
+        if(this.state.myProfile){
+            if(!this.state.editMode){
+                return(<div>
+                    {this.state.profile.location ? this.state.profile.location : "No location added."}
+                </div>)
+            } else {
+                return(<div>
+                    <Form.Group>
+                        <div className={"editLocationWrapper"}>
+                            <Form.Control size="sm" type="text" placeholder="Location" value = {this.state.profile.location}
+                                          onChange = {e => {
+                                              let location = e.target.value;
+                                              this.setState((prevState) => ({
+                                                profile: {
+                                                    ...prevState.profile,
+                                                    location: location
+                                                },
+                                              })
+                                          )}}/>
+                        </div>
+                    </Form.Group>
+                </div>)
+            }
+        } else {
+            return(<div>
+                {this.state.profile.location ? this.state.profile.location : "No locatio added."}
+            </div>)
         }
     }
 
@@ -88,7 +164,12 @@ class Profile extends  React.Component {
         const addButton = require('../../assets/add-button.png');
         if(this.state.myProfile) {
             if(this.state.profile.bio) {
-                return(<div>{this.state.profile.bio}</div>)
+                return(
+                    <div>
+                        <div>{this.state.profile.bio}</div>
+                        <div className={"addButton"}><img className={"addButton"} src={addButton}/></div>
+                    </div>
+                )
             } else if (this.state.editMode) {
                 return (<div className={"addButton"}><img className={"addButton"} src={addButton}/></div>)
             } else {
@@ -104,8 +185,8 @@ class Profile extends  React.Component {
     }
 
     handleClose(){
-        console.log('haaa');
         this.setState({showPhotoModal: !this.state.showPhotoModal})
+        console.log(this.state)
     }
 
     render() {
@@ -125,14 +206,14 @@ class Profile extends  React.Component {
                             <Card.Body>
                                 <Card.Title>{this.state.profile.user.first_name + " " + this.state.profile.user.last_name}, 22</Card.Title>
                                 <Card.Text>
-                                    Ljubljana, Slovenia
+                                    {this.renderLocation()}
                                 </Card.Text>
                             </Card.Body>
                             <div className={"actions"}>
                                 <ListGroup className="list-group-flush">
                                     {this.state.myProfile && <ListGroupItem action onClick={() => {this.setState({editMode: !this.state.editMode})}}>
                                         {this.state.editMode ?
-                                             (<div>Done</div>) :   (<div>Edit profile</div>)
+                                             (<div onClick={this.updateProfile}>Done</div>) :   (<div>Edit profile</div>)
                                         }
                                     </ListGroupItem>}
                                     {!this.state.myProfile && <ListGroupItem action>Message</ListGroupItem>}
@@ -177,7 +258,7 @@ class Profile extends  React.Component {
                         </Card>
                     </div>
                 </div>
-                <PhotoModal show={this.state.showPhotoModal} handleClose={this.handleClose}/>
+                <PhotoModal onUploaded={this.getUserInfo} show={this.state.showPhotoModal} handleClose={this.handleClose}/>
             </div>
         );
     }

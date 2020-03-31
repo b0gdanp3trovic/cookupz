@@ -11,8 +11,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CoffeeScript File" />
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -117,7 +117,7 @@
       <workItem from="1585389898995" duration="12763000" />
       <workItem from="1585435317764" duration="5020000" />
       <workItem from="1585476573748" duration="25773000" />
-      <workItem from="1585650887171" duration="6324000" />
+      <workItem from="1585650887171" duration="19881000" />
     </task>
     <servers />
   </component>

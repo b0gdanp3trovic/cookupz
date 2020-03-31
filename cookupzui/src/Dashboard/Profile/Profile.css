@@ -6,7 +6,7 @@
 }
 
 .userProfile {
-    margin-top: 2px;
+    margin-top: 50px;
 }
 
 .list-group-item {
@@ -17,7 +17,7 @@
 .userInfo{
     flex: 1 1 auto;
     height: 100%;
-    margin-top: 2px;
+    margin-top: 50px;
     max-width: 80%;
 }
 
@@ -38,15 +38,17 @@
     text-align: center;
 }
 
-
-
+.changePhotoButton{
+    position: absolute;
+    top: 46%;
+    left: 50%;
+}
 .noPhotoCard {
     width: 286px;
     height: 193px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
 }
 
 .addPhotoButton {
@@ -59,6 +61,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.profilePic{
+    max-width: 286px;
+    max-height: 250px;
 }
 
 .addButton {
@@ -75,4 +82,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.editLocationWrapper{
+    display: flex;
+    flex-direction: row;
+}
+
 

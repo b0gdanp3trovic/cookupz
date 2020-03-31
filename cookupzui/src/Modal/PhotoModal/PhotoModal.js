@@ -12,12 +12,14 @@ export default function PhotoModal(props) {
     const [state, setState] = useState({});
     const [uploadInitialized, setUploadInitialized] = useState(false);
     const [uploadFinished, setUploadFinished] = useState(false);
+    const [photoSelected, setPhotoSelected] = useState(false);
 
 
     let fileSelectedHandler = event => {
         console.log(event.target.files[0])
         const file = event.target.files[0];
         setState({selectedFile: file});
+        setPhotoSelected(true);
         console.log(file)
     };
 
@@ -37,14 +39,13 @@ export default function PhotoModal(props) {
                 }
                 }).then(res => {
                 setState({loading:false});
-                setUploadFinished(true)
+                setUploadFinished(true);
+                props.onUploaded()
             })
         })
     };
 
     return(
-
-
         <>
             <Modal show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
@@ -68,7 +69,7 @@ export default function PhotoModal(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <div className={"uploadButton"}>
-                        {!uploadFinished && <Button variant="primary" onClick={fileUploadHandler}>
+                        {!uploadFinished && <Button disabled={!photoSelected} variant="primary" onClick={fileUploadHandler}>
                             Upload
                         </Button>}
                     </div>

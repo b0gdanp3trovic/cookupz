@@ -8,7 +8,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['user', 'bio', 'photo_url', 'location', 'phone_number']
+        fields = ['id', 'user','user_id', 'bio', 'photo_url', 'location', 'phone_number']
 
     def save(self):
         profile = Profile(
@@ -20,18 +20,23 @@ class ProfileSerializer(serializers.ModelSerializer):
         )
         profile.save()
 
+class ProfileSerializerUpdateDTO(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id', 'user_id', 'bio', 'photo_url', 'location', 'phone_number']
+
 
 
 class OfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
-        fields = ['user', 'int_users', 'chosen_user', 'description', 'location', 'tag']
+        fields = ['user', 'profile', 'int_users', 'chosen_user', 'description', 'location', 'tag']
 
 class OfferSerializerWithUser(serializers.ModelSerializer):
-    user = UserDTOSerializer(read_only=True)
+    profile = ProfileSerializer(read_only=True)
     class Meta:
         model = Offer
-        fields = ['user', 'int_users', 'chosen_user', 'description', 'location', 'tag']
+        fields = ['profile', 'int_users', 'chosen_user', 'description', 'location', 'tag']
 
 
 

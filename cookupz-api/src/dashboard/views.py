@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import UpdateAPIView
 from rest_framework import status
 from .models import Profile, Offer
-from .serializers import ProfileSerializer, OfferSerializer, UserDTOSerializer, OfferSerializerWithUser
+from .serializers import ProfileSerializer, OfferSerializer, UserDTOSerializer, OfferSerializerWithUser, ProfileSerializerUpdateDTO
 from django.contrib.auth.models import User
 import os
 import cloudinary
@@ -44,12 +45,27 @@ class ProfilePhotoView(APIView):
         #profile.update(photo_url = response['url'])
         return Response(data=profile_serializer.data, status=status.HTTP_200_OK)
 
+class ProfileEditView(UpdateAPIView):
+
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    lookup_field = 'id'
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.location = request.data['location']
+        instance.phone_number = request.data['phone_number']
+        instance.bio = request.data['bio']
+        instance.save()
+        serializer = self.get_serializer(instance)          
+        return Response(data = serializer.data, status=status.HTTP_200_OK)
 
 class OfferView(APIView):
     def post(self, request):
         data = {}
         user = User.objects.filter(username = request.data['username']).first()
+        profile = Profile.objects.filter(user = user.id).first()
         data['user'] = user.id
+        data['profile'] = profile.id
         data.update(request.data)
         serializer = OfferSerializer(data = data)
         if(serializer.is_valid()):
@@ -61,6 +77,8 @@ class OfferView(APIView):
     def get(self, request):
         data = Offer.objects.all()
         serializer = OfferSerializerWithUser(data, many=True)
+        for offer in data:
+            print(offer.user_id)
         if(serializer.is_valid):
             return Response(data = serializer.data, status = status.HTTP_200_OK)
         else:
