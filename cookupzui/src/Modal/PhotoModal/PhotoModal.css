@@ -2,10 +2,12 @@
     float: left;
 }
 
-.modal-footer {
-    justify-content: space-between;
+.offerFooter{
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
 
-.doneButton {
+.offerPostDone {
     float: right;
 }

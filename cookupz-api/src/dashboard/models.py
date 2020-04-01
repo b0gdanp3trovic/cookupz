@@ -22,6 +22,7 @@ class Offer(models.Model):
         Profile,
         on_delete = models.CASCADE
     )
+    title = models.TextField(default=None, blank=True, null=True)
     int_users = models.ManyToManyField(User, related_name='int_offers',default=None, blank=True, null=True)
     chosen_user = models.OneToOneField(User, related_name='chosen_offer', on_delete = models.CASCADE, default=None, blank=True, null=True)
     description = models.TextField(default=None, blank=True, null=True)

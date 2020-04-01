@@ -30,7 +30,7 @@ class ProfileSerializerUpdateDTO(serializers.ModelSerializer):
 class OfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
-        fields = ['user', 'profile', 'int_users', 'chosen_user', 'description', 'location', 'tag']
+        fields = ['user', 'profile', 'title', 'int_users', 'chosen_user', 'description', 'location', 'tag']
 
 class OfferSerializerWithUser(serializers.ModelSerializer):
     profile = ProfileSerializer(read_only=True)

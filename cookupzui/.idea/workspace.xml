@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="" />
+    <list default="true" id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/dashboard/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CoffeeScript File" />
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -119,6 +122,9 @@
       <workItem from="1585476573748" duration="25773000" />
       <workItem from="1585650887171" duration="20482000" />
       <workItem from="1585695558918" duration="4532000" />
+      <workItem from="1585734340947" duration="5898000" />
+      <workItem from="1585743610582" duration="3635000" />
+      <workItem from="1585765439149" duration="5756000" />
     </task>
     <servers />
   </component>

@@ -25,7 +25,7 @@ export default function PhotoModal(props) {
 
     let fileUploadHandler = () => {
         setState({loading: true});
-        setUploadInitialized(true)
+        setUploadInitialized(true);
 
         let formData = new FormData();
         formData.append("image", state.selectedFile);

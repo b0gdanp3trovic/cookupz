@@ -85,5 +85,13 @@ class OfferView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+class OfferForUserView(APIView):
+    def get(self, request, username):
+        user = User.objects.filter(username = username).first()
+        offers = Offer.objects.filter(user_id = user.id)
+        serializer = OfferSerializer(offers, many=True)
+        return Response(data = serializer.data, status =status.HTTP_200_OK)
+
+
 
 

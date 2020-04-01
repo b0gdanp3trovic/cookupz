@@ -21,7 +21,7 @@ class Sidebar extends React.Component {
                 <ul>
                     <li><Link to={profileLink} className={"sidebarLink"}>My profile</Link></li>
                     <li><Link to={"/dashboard"} className={"sidebarLink"}>Explore</Link></li>
-                    <li><Link to={"/offer"} className={"sidebarLink"}>Offer</Link></li>
+                    <li><Link to={"/offer"} className={"sidebarLink"}>Offers</Link></li>
                 </ul>
             </div>
         );

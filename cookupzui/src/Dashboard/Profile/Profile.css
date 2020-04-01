@@ -86,10 +86,17 @@
 .experienceItem, .experienceItemAdd{
     background-color: white;
     color: black;
+    display: flex;
+    justify-content: center;
 }
 .experienceItemAdd{
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.experience{
+    display: flex;
     justify-content: center;
 }
 

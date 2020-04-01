@@ -1,11 +1,16 @@
 
 
 .offerWrapper{
-    margin-left: 500px;
-    width: 700px;
+    margin-left: 200px;
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.newOfferWrap{
+    height: 100%;
+    width: 100%;
+    text-align: center;
 }
 
 .offerOverlay{
@@ -15,4 +20,51 @@
     background-color: orangered;
     color: white;
     align-self: center;
+}
+
+.myOfferHeader{
+    background-color: lightcoral;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.offerListItem{
+    background-color: white;
+    color: black;
+    width: 750px;
+    display: flex;
+    justify-content: center;
+}
+
+.myOfferWrapper{
+    height: 90%;
+    width: 90%;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.subCardHeader{
+    display: flex;
+    justify-content: center;
+}
+
+.offerCard{
+    width: 100%;
+}
+
+.interested{
+    color : red;
+}
+
+.newOfferButton{
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    align-self: center;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 0;
 }

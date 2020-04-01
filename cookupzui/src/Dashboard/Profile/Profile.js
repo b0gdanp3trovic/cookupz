@@ -255,14 +255,12 @@ class Profile extends  React.Component {
                             </Card.Body>
                         </Card>
                         <Card tag={"div"} className="bio">
-                            <Card.Header className={"bioHeader"}>Experience</Card.Header>
+                            <Card.Header className={"bioHeader"}>Cooking experience</Card.Header>
                             <Card.Body className="cardBodyXp">
                                 <Card.Text>
                                     <ListGroup className={"experience"} variant="flush">
-                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Arabika lmao</ListGroup.Item>
-                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Am am</ListGroup.Item>
-                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Grizli</ListGroup.Item>
-                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Kurac</ListGroup.Item>
+                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Glavni kuvar at Arabika - 4 months</ListGroup.Item>
+                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Pica majstor at Has za čas - 6 months</ListGroup.Item>
                                         {this.state.editMode && <ListGroup.Item tag={"div"} className={"experienceItemAdd"}>
                                             <div className={"addButton"}><img className={"addButton"} src={addButton}/></div>
                                         </ListGroup.Item>}
