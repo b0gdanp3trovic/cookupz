@@ -11,6 +11,7 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import checkTokenService from "../../checkToken";
 import PhotoModal from "../../Modal/PhotoModal/PhotoModal";
+import {withRouter} from "react-router-dom";
 
 
 class Profile extends  React.Component {
@@ -37,9 +38,16 @@ class Profile extends  React.Component {
         this.user = {};
         this.getUserInfo = this.getUserInfo.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
-        this.locationOnChange = this.locationOnChange.bind(this);
 
+        props.history.listen((location, action) => {
+            console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`)
+            var profileRegex = new RegExp('.profile.')
+            if(profileRegex.test(location.pathname)){
+                window.location.reload();
+            }
+        })
     }
+
 
 
      getUserInfo () {
@@ -103,9 +111,7 @@ class Profile extends  React.Component {
         }
     }
 
-    locationOnChange(e) {
-        const newName = e.target.value
-    }
+
 
     updateProfile(){
 
@@ -139,7 +145,8 @@ class Profile extends  React.Component {
                 return(<div>
                     <Form.Group>
                         <div className={"editLocationWrapper"}>
-                            <Form.Control size="sm" type="text" placeholder="Location" value = {this.state.profile.location}
+                            <Form.Control size="sm" type="text" placeholder="Location"
+                                          value = {this.state.profile.location}
                                           onChange = {e => {
                                               let location = e.target.value;
                                               this.setState((prevState) => ({
@@ -148,7 +155,8 @@ class Profile extends  React.Component {
                                                     location: location
                                                 },
                                               })
-                                          )}}/>
+                                          )}}
+                            />
                         </div>
                     </Form.Group>
                 </div>)
@@ -163,15 +171,28 @@ class Profile extends  React.Component {
     renderBio() {
         const addButton = require('../../assets/add-button.png');
         if(this.state.myProfile) {
-            if(this.state.profile.bio) {
+            if(!this.state.editMode) {
                 return(
                     <div>
-                        <div>{this.state.profile.bio}</div>
-                        <div className={"addButton"}><img className={"addButton"} src={addButton}/></div>
+                        <div>{this.state.profile.bio ? this.state.profile.bio : "No bio added"}</div>
                     </div>
                 )
             } else if (this.state.editMode) {
-                return (<div className={"addButton"}><img className={"addButton"} src={addButton}/></div>)
+                return (<div className={"editBioText"}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Control as="textarea" rows="3"
+                                      value = {this.state.profile.bio}
+                                      onChange = {e => {
+                                          let bio = e.target.value;
+                                          this.setState((prevState) => ({
+                                                  profile: {
+                                                      ...prevState.profile,
+                                                      bio: bio
+                                                  },
+                                              })
+                                          )}}/>
+                    </Form.Group>
+                </div>)
             } else {
                 return (<div>No bio added.</div>)
             }
@@ -184,8 +205,9 @@ class Profile extends  React.Component {
         }
     }
 
+
     handleClose(){
-        this.setState({showPhotoModal: !this.state.showPhotoModal})
+        this.setState({showPhotoModal: !this.state.showPhotoModal});
         console.log(this.state)
     }
 
@@ -227,7 +249,7 @@ class Profile extends  React.Component {
                         <Card className="bio">
                             <Card.Header className={"bioHeader"}>Bio</Card.Header>
                             <Card.Body className="cardBody">
-                                <Card.Text>
+                                <Card.Text className={"cardText"}>
                                     {this.renderBio()}
                                 </Card.Text>
                             </Card.Body>
@@ -264,4 +286,4 @@ class Profile extends  React.Component {
     }
 }
 
-export default Profile;
+export default withRouter(Profile);

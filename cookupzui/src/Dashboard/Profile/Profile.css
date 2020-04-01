@@ -51,6 +51,16 @@
     justify-content: center;
 }
 
+.cardText{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.editBioText{
+    width: 100%;
+}
+
 .addPhotoButton {
     width: 50%;
     vertical-align: center;
