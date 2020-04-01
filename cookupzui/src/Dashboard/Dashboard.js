@@ -51,7 +51,7 @@ function Dashboard (props) {
                                                     <ListGroup.Item >
                                                         <div className={"upperPart"}>
                                                             <div className={"photoWrapper"}>
-                                                                <Card.Img  src={item.profile.photo_url} />
+                                                                <Card.Img className={"userProfilePicture"}  src={item.profile.photo_url} />
                                                             </div>
                                                             <div className={"name"}>
                                                                 <Link to={"/profile/" + item.profile.user.username} className={"linkToProfile"} >

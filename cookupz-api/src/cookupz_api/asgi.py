@@ -12,5 +12,8 @@ import os
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cookupz_api.settings')
+os.environ['CLOUDINARY_API_KEY'] = '182881756396157'
+os.environ['CLOUDINARY_API_SECRET'] = '8-AGJxBDPowoisXELVbLfveFikc'
+os.environ['CLOUDINARY_NAME'] = 'dev1pdqyr'
 
 application = get_asgi_application()

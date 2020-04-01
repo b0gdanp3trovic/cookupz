@@ -5,6 +5,8 @@ import {Link, withRouter} from "react-router-dom";
 
 
 function Header (props) {
+    const bell = require('../../assets/bell.png');
+
 
     function handleLogout(){
         localStorage.clear();
@@ -12,13 +14,18 @@ function Header (props) {
     }
 
     return (
-        <div className={"header"}>
+        <div className={"headerDash"}>
             <div className={"innerHeader"}>
                 <div className={"logoContainer"}>
                     <h1>Cook<span>upz</span></h1>
                 </div>
                 <ul className={"navigation"}>
-                    <Link className={"logoutLink"} onClick={handleLogout}>Log out</Link>
+                    <div className={"subNavWrapper"}>
+                        <div className={"notification"}>
+                            <img className={"bellImg"} src={bell}/>
+                        </div>
+                        <Link className={"logoutLink"} onClick={handleLogout}>Log out</Link>
+                    </div>
                 </ul>
             </div>
         </div>

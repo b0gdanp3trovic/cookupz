@@ -23,11 +23,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'jmmw3gu*b_yvj4cq_t(iq$mbi^u-js@)v_fko&eofvfs!)a89j'
 
+ASGI_APPLICATION = 'cookupz_api.routing.application'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
+os.environ['CLOUDINARY_API_KEY'] = '182881756396157'
+os.environ['CLOUDINARY_API_SECRET'] = '8-AGJxBDPowoisXELVbLfveFikc'
+os.environ['CLOUDINARY_NAME'] = 'dev1pdqyr'
 
 # Application definition
 
@@ -43,7 +48,9 @@ INSTALLED_APPS = [
     'corsheaders',
     #own
     'users',
-    'dashboard'
+    'dashboard',
+    'chat',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -106,7 +113,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'cookupz_api.wsgi.application'
 
 
 # Database
@@ -114,9 +120,9 @@ WSGI_APPLICATION = 'cookupz_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cookupz',
-        'USER': 'root',
+        'USER': 'postgres',
         'PASSWORD':'qwer1234'
     }
 }

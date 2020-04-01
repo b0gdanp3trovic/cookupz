@@ -33,9 +33,9 @@ class ProfileList(APIView):
 class ProfilePhotoView(APIView):
     def post(self, request, username):
         cloudinary.config( 
-            cloud_name = os.environ['CLOUDINARY_NAME'], 
-            api_key = os.environ['CLOUDINARY_API_KEY'], 
-            api_secret = os.environ['CLOUDINARY_API_SECRET'] 
+            cloud_name = os.environ.get('CLOUDINARY_NAME'), 
+            api_key = os.environ.get('CLOUDINARY_API_KEY'), 
+            api_secret = os.environ.get('CLOUDINARY_API_SECRET')
         )
         response = cloudinary.uploader.upload(request.data['image'])
         user = User.objects.filter(username=username)[0]

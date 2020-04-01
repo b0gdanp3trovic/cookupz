@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './Welcome.css'
 import Login from "../Login/Login";
+import HeaderWelcome from "../AppBar/HeaderW/HeaderWelcome";
 
 
 
@@ -13,9 +14,8 @@ class Welcome extends React.Component {
 
         return(
             <div>
-                {this.props.header}
+                <HeaderWelcome/>
                 <div className={"wContainer"}>
-                    <h2 className={"wHeader"}>Welcome to Cookupz!</h2>
                     <img className={"logo"} src={logo}/>
                     <Login></Login>
                 </div>
