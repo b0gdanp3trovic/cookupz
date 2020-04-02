@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1693d8d1-62f1-42b2-88f5-b667e96e1404" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/cookupz_api/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/cookupz_api/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/cookupz_api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/cookupz_api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cookupz-api/src/chat/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/chat/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cookupz-api/src/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cookupz-api/src/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +126,8 @@
       <workItem from="1585734340947" duration="5898000" />
       <workItem from="1585743610582" duration="3635000" />
       <workItem from="1585765439149" duration="10770000" />
-      <workItem from="1585781248230" duration="1945000" />
+      <workItem from="1585781248230" duration="1952000" />
+      <workItem from="1585846583006" duration="1730000" />
     </task>
     <servers />
   </component>

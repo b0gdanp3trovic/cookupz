@@ -24,6 +24,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jmmw3gu*b_yvj4cq_t(iq$mbi^u-js@)v_fko&eofvfs!)a89j'
 
 ASGI_APPLICATION = 'cookupz_api.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
