@@ -21,9 +21,21 @@
             + '/'
         );
 
+        chatSocket.onopen = function(e) {
+           // fetchMessages()
+        }
+
+        function fetchMessages(){
+            chatSocket.send(JSON.stringify({'command': 'fetch_messages' }))
+        }
+
         chatSocket.onmessage = function(e) {
-            const data = JSON.parse(e.data);
+            var data = JSON.parse(e.data);
+            console.log(data);
+            var message = data['message']
+            print(message)
             document.querySelector('#chat-log').value += (data.message + '\n');
+
         };
 
         chatSocket.onclose = function(e) {
@@ -41,6 +53,7 @@
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
+                'command' :  'new_message',
                 'message': message
             }));
             messageInputDom.value = '';
