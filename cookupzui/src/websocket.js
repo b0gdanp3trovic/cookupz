@@ -51,7 +51,13 @@ class WebSocketService {
     }
 
     newChatMessage(message){
-        this.sendMessage({command: 'new_message', from:message.author, message: message.message, chat_id: message.chat_id})
+        this.sendMessage({
+            command: 'new_message',
+            from:message.author,
+            message: message.message,
+            chat_id: message.chat_id,
+            to: message.receiver
+        })
     }
 
     addCallbacks(messagesCallback, newMessageCallback){
@@ -72,23 +78,6 @@ class WebSocketService {
         return this.socketRef.readyState;
     }
 
-    waitForSocketConnection(callback){
-        const socket = this.socketRef;
-        const rec = this.waitForSocketConnection;
-        setTimeout(
-            function () {
-                if(socket.readyState === 1) {
-                    console.log('connection established')
-                    if(callback !== null){
-                        callback();
-                    }
-                    return;
-                } else {
-                    console.log('waiting for connection...');
-                    rec(callback);
-                }
-            })
-    }
 
 
 

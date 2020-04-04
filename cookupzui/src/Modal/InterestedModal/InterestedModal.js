@@ -16,11 +16,15 @@ export default function InterestedModal(props){
     function handleSubmit(e){
         e.preventDefault();
         const username = localStorage.getItem("currentUsername");
-        const chosenUser = props.chosenUser.username;
-        const offer = props.offer;
         WebSocketInstance.connect();
         Promise.all([waitForSocketConnection(), createNewChat()]).then(([resWs, resCC]) => {
-            WebSocketInstance.newChatMessage({chat_id: resCC.data.id, message: 'hiii', author: username})
+            WebSocketInstance.newChatMessage({
+                chat_id: resCC.data.id,
+                message: message,
+                author: username,
+                receiver: props.chosenUser.username
+            });
+            props.handleClose()
         })
 
     }
@@ -48,7 +52,6 @@ export default function InterestedModal(props){
                         "Authorization": "Bearer " + localStorage.getItem("access")
                     },
                 };
-                console.log(props.chosenUser.offer.id)
                 axios.post('http://localhost:8000/chat/create/',{
                     offer_id: props.chosenUser.offer.id,
                     messages: {},
@@ -85,11 +88,6 @@ export default function InterestedModal(props){
                         </Button>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={props.handleClose}>
-                        Done
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </>
     )

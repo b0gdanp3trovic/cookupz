@@ -18,6 +18,9 @@ class Chat(models.Model):
 class Message(models.Model):
     author = models.ForeignKey(
         User, related_name='messages', on_delete=models.CASCADE)
+    receiver = models.ForeignKey(
+        User, related_name='received_messages', on_delete=models.CASCADE
+    )
     chat = models.ForeignKey( 
         Chat, related_name='messages', on_delete = models.CASCADE
     )
