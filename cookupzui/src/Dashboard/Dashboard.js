@@ -9,6 +9,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import checkTokenService from "../checkToken";
 import {Link, withRouter} from "react-router-dom";
+import InterestedModal from "../Modal/InterestedModal/InterestedModal";
 
 
 
@@ -30,8 +31,16 @@ function Dashboard (props) {
 
     const[state, setState] = useState();
     const[dataLoaded, setDataLoaded] = useState(false);
+    const[offerSelected, setOfferSelected] = useState(false);
+    const[offer, setOffer] = useState({});
 
-
+    function openModal(item){
+        setOffer({
+            username: item.profile.user.username,
+            offer: item
+        });
+        setOfferSelected(true);
+    }
     const wallpaper = require('../assets/holder.jpg');
     if(dataLoaded) {
         return(
@@ -79,15 +88,18 @@ function Dashboard (props) {
                                         </Jumbotron>
                                         <div className={"buttons"}>
                                             <div className={"button"}>
-                                                <Button size="sm" variant="outline-secondary">I'm interested</Button>{' '}
+                                                <Button onClick={() => openModal(item)} size="sm" variant="outline-secondary">I'm interested</Button>{' '}
                                             </div>
                                         </div>
                                     </Card>
-                                </div>
+                            </div>
                         )
                     })}
                     </div>
                 </div>
+                {offerSelected &&
+                    <InterestedModal chosenUser={offer} show={offerSelected} handleClose={() => setOfferSelected(!offerSelected)}/>
+                }
             </div>
         )
     } else {
