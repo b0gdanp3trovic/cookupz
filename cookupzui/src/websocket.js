@@ -1,3 +1,5 @@
+import {parse} from "@fortawesome/fontawesome-svg-core";
+
 class WebSocketService {
     static instance = null;
     callbacks = {};
@@ -13,14 +15,15 @@ class WebSocketService {
         this.socketRef = null;
     }
 
-    connect(){
-        const path = 'ws://localhost:8000/ws/chat/3/';
+    connect(chatId){
+        const path = 'ws://localhost:8000/ws/chat/' + chatId + '/';
         this.socketRef = new WebSocket(path);
         this.socketRef.onopen = () => {
             console.log('websocket opened')
         };
-        this.socketRef.onmessage = () => {
-            // sending a message
+        this.socketRef.onmessage = (data) => {
+             console.log(data);
+            this.socketNewMessage(data);
         };
         this.socketRef.onerror = (e) => {
             console.log(e.message);
@@ -33,7 +36,8 @@ class WebSocketService {
     }
 
     socketNewMessage(data) {
-        const parsedData = JSON.parse(data);
+        const parsedData = JSON.parse(data.data);
+        console.log(parsedData.message);
         const command = parsedData.command;
         if(Object.keys(this.callbacks).length === 0){
             return;
@@ -42,12 +46,13 @@ class WebSocketService {
             this.callbacks[command](parsedData.messages)
         }
         if(command === 'new_message') {
+            parsedData.message.receiver = parsedData.to;
             this.callbacks[command](parsedData.message)
         }
     }
 
-    fetchMessages(username){
-        this.sendMessage({command: 'fetch_messages', username: username})
+    fetchMessages(chatId){
+        this.sendMessage({command: 'fetch_messages', chat_id: chatId})
     }
 
     newChatMessage(message){

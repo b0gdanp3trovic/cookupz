@@ -30,5 +30,5 @@ class Message(models.Model):
     def __str__(self):
         return self.user.username
 
-    def last_10():
-        return Message.objects.order_by('-timestamp').all()[:10]
+    def last_10(chat_id):
+        return Message.objects.filter(chat_id = chat_id).order_by('timestamp').all()
