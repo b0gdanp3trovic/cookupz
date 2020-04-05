@@ -47,15 +47,12 @@ export default function InterestedModal(props){
        const accessToken = localStorage.getItem("access");
         return new Promise(resolve => {
             checkTokenService.validateToken(accessToken).then(res => {
-                const param = {
-                    headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("access")
-                    },
-                };
                 axios.post('http://localhost:8000/chat/create/',{
                     offer_id: props.chosenUser.offer.id,
                     messages: {},
-                    participants: {}
+                    participants: {},
+                    username: localStorage.getItem("currentUsername"),
+                    receiver: props.chosenUser.username
                 }, {
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("access")

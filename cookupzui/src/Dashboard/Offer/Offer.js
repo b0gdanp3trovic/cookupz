@@ -32,7 +32,6 @@ function Offer (props){
     }
 
     useEffect(() => {
-        setState({kurac: 'a'});
         const accessToken = localStorage.getItem("access");
         checkTokenService.validateToken(accessToken).then(res => {
             const param = {
@@ -42,7 +41,6 @@ function Offer (props){
             };
             axios.get("http://localhost:8000/dashboard/offer/" + localStorage.getItem("currentUsername"), param).then(res => {
                 editState(res.data)
-
             })
         })
     }, []);
@@ -62,7 +60,7 @@ function Offer (props){
                             <Card.Header className={"myOfferHeader"}>My offers</Card.Header>
                             <ListGroup.Item action className={"newOfferButton"} >
                                 <div className={"newOfferWrap"} onClick={() => {
-                                    setShowModal(!showModal)
+                                    setShowModal(!showModal);
                                     console.log(showModal);
                                 }}>
                                     New offer

@@ -22,6 +22,7 @@ class Sidebar extends React.Component {
                     <li><Link to={profileLink} className={"sidebarLink"}>My profile</Link></li>
                     <li><Link to={"/dashboard"} className={"sidebarLink"}>Explore</Link></li>
                     <li><Link to={"/offer"} className={"sidebarLink"}>Offers</Link></li>
+                    <li><Link to={"/chat"} className={"sidebarLink"}>Chat</Link></li>
                 </ul>
             </div>
         );

@@ -44,7 +44,7 @@ function OfferModal(props){
                 setToastMessage('Description cannot be left empty.')
                 return;
             }
-            axios.post("http://localhost:8000/dashboard/offer", params, {
+            axios.post("http://localhost:8000/dashboard/offerdash/" + localStorage.getItem("currentUsername"), params, {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("access")
                 },

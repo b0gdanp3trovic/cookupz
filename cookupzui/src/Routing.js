@@ -9,6 +9,7 @@ import HeaderWelcome from "./AppBar/HeaderW/HeaderWelcome";
 import Header from "./AppBar/HeaderMain/Header";
 import {AppContext} from "./contexts/AppContext";
 import Offer from "./Dashboard/Offer/Offer";
+import Chat from "./Dashboard/Chat/Chat";
 
 
 export default function Routing(props){
@@ -33,6 +34,7 @@ export default function Routing(props){
                 <PropsRoute exact path ='/register' component = {Register} header={welcomeHeader()}/>
                 <PropsRoute exact path ='/dashboard' component = {Dashboard} header={mainPageHeader()}/>
                 <PropsRoute exact path = '/profile/:id' context = {value} component = {Profile} header = {mainPageHeader()}/>
+                <PropsRoute exact path = '/chat' component={Chat}/>
             </Switch>
         </div>
     )

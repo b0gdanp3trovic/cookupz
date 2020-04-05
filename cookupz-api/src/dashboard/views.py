@@ -60,7 +60,7 @@ class ProfileEditView(UpdateAPIView):
         return Response(data = serializer.data, status=status.HTTP_200_OK)
 
 class OfferView(APIView):
-    def post(self, request):
+    def post(self, request, username):
         data = {}
         user = User.objects.filter(username = request.data['username']).first()
         profile = Profile.objects.filter(user = user.id).first()
@@ -74,8 +74,12 @@ class OfferView(APIView):
         else: 
             return Response(data = serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request):
-        data = Offer.objects.all()
+    def get(self, request, username):
+        print(username)
+        user = User.objects.filter(username = username)[0]
+        print(user.int_offers)
+        print(user.id)
+        data = Offer.objects.all().exclude(user = user.id)
         serializer = OfferSerializerWithUser(data, many=True)
         for offer in data:
             print(offer.user_id)

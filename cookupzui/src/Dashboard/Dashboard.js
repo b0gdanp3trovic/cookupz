@@ -18,11 +18,12 @@ function Dashboard (props) {
         const accessToken = localStorage.getItem("access")
         checkTokenService.validateToken(accessToken).then(res => {
             const param = {
+                username: localStorage.getItem("currentUsername"),
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("access")
                 },
             };
-            axios.get("http://localhost:8000/dashboard/offer", param).then(res => {
+            axios.get("http://localhost:8000/dashboard/offerdash/" + localStorage.getItem("currentUsername"),  param).then(res => {
                 setState(res.data);
                 setDataLoaded(true)
             })
