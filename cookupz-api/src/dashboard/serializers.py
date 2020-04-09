@@ -3,16 +3,22 @@ from rest_framework import serializers
 from users.serializers import UserSerializer
 from django.contrib.auth.models import User
 from users.serializers import RegisterSerializer
-from dashboard.models import Profile, Offer, Experience
+from dashboard.models import Profile, Offer, Experience, Interest
 
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = ['where', 'position']
 
+class InterestsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interest
+        fields = ['title', 'int_description']
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = RegisterSerializer(required = True)
     experience = ExperienceSerializer(many=True)
+    interests = InterestsSerializer(many=True)
 
     class Meta:
         model = Profile

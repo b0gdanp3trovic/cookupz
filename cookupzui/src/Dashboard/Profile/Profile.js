@@ -13,6 +13,8 @@ import checkTokenService from "../../checkToken";
 import PhotoModal from "../../Modal/PhotoModal/PhotoModal";
 import {withRouter} from "react-router-dom";
 import ExperienceModal from "../../Modal/ExperienceModal/ExperienceModal";
+import Table from "react-bootstrap/Table";
+import InterestsModal from "../../Modal/InterestsModal/InterestsModal";
 
 
 class Profile extends  React.Component {
@@ -22,6 +24,7 @@ class Profile extends  React.Component {
         super(props);
         this.handleClosePhoto = this.handleClosePhoto.bind(this);
         this.handleCloseExperience = this.handleCloseExperience.bind(this);
+        this.handleCloseInterests = this.handleCloseInterests.bind(this);
         this.state = {
             userAuthenticated: false,
             token: localStorage.getItem("access"),
@@ -33,7 +36,10 @@ class Profile extends  React.Component {
             showPhotoModal: false,
             photoUploaded: false,
             showExperienceModal: false,
-            location: ''
+            showInterestsModal: false,
+            location: '',
+            shouldUpdateExperience: false,
+            shouldUpdateInterests:false,
         };
 
         this.location = '';
@@ -72,11 +78,22 @@ class Profile extends  React.Component {
     }
 
     setExperience(experience){
-        console.log(experience);
+        console.log('setExperience');
+        this.setState({shouldUpdateExperience: true});
         this.setState(prevState => ({
             profile:{
                 ...prevState.profile,
                 experience: [...prevState.profile.experience, experience]
+            }
+        }))
+    }
+
+    setInterests(interests){
+        this.setState({shouldUpdateInterests: true});
+        this.setState(prevState => ({
+            profile:{
+                ...prevState.profile,
+                interests : [...prevState.profile.interests, interests]
             }
         }))
     }
@@ -110,7 +127,7 @@ class Profile extends  React.Component {
                     return  (<Card.Img className={"profilePic"} variant="top" src={this.state.profile.photo_url} />);
                 }
             } else if (this.state.editMode) {
-                return (<Card className={"noPhotoCard"}><Button onClick={this.handleClose}  className={"addPhotoButton"}
+                return (<Card className={"noPhotoCard"}><Button onClick={this.handleClosePhoto}  className={"addPhotoButton"}
                                                                 variant="secondary">Add image</Button>{' '}</Card>)
             } else {
                 return (<Card className={"noPhotoCard"}><div>No photo added.</div></Card>)
@@ -135,7 +152,14 @@ class Profile extends  React.Component {
                     "Authorization": "Bearer " + localStorage.getItem("access")
                 },
             };
-            axios.put('http://localhost:8000/dashboard/profileedit/' + this.state.profile.id, this.state.profile, {
+            const profile = {...this.state.profile};
+            if(!this.state.shouldUpdateExperience){
+                profile.experience = [];
+            }
+            if(!this.state.shouldUpdateInterests){
+                profile.interests = [];
+            }
+            axios.put('http://localhost:8000/dashboard/profileedit/' + this.state.profile.id, profile, {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("access")
                 }
@@ -228,6 +252,10 @@ class Profile extends  React.Component {
         this.setState({showExperienceModal: !this.state.showExperienceModal})
     }
 
+    handleCloseInterests(){
+        this.setState({showInterestsModal: !this.state.showInterestsModal})
+    }
+
     render() {
         if(!this.state.profile) {
             return <div/>
@@ -252,7 +280,7 @@ class Profile extends  React.Component {
                                 <ListGroup className="list-group-flush">
                                     {this.state.myProfile && <ListGroupItem action onClick={() => {this.setState({editMode: !this.state.editMode})}}>
                                         {this.state.editMode ?
-                                             (<div onClick={this.updateProfile}>Done</div>) :   (<div>Edit profile</div>)
+                                             (<div onClick={this.updateProfile}>Confirm</div>) :   (<div>Edit profile</div>)
                                         }
                                     </ListGroupItem>}
                                     {!this.state.myProfile && <ListGroupItem action>Message</ListGroupItem>}
@@ -277,9 +305,8 @@ class Profile extends  React.Component {
                                 <Card.Text>
                                     <ListGroup className={"experience"} variant="flush">
                                         {this.state.profile.experience.map(element => {
-                                            console.log(element);
                                             return(
-                                                <ListGroup.Item tag={"div"} className={"experienceItem"}>{element.position + " at " + element.where}</ListGroup.Item>
+                                                <ListGroup.Item tag={"div"} className={"experienceItem"}>{element.position + "  at"} 	&nbsp; <div className={"boldedText"}>{element.where}</div></ListGroup.Item>
                                             )
                                         })}
                                         {this.state.profile.experience.length === 0 && !this.state.editMode && <ListGroup.Item tag={"div"} className={"experienceItem"}>No experience added.</ListGroup.Item>}
@@ -294,7 +321,27 @@ class Profile extends  React.Component {
                             <Card.Header>Interests</Card.Header>
                             <Card.Body className="cardBody">
                                 <Card.Text>
-                                    Spicy, Italian, Chinese, Indian, Roštilj
+
+                                    <ListGroup.Item tag={"div"} className={"interestItem"}>
+                                        <Table className={"interestTable"} bordered hover>
+                                            <tbody>
+                                            {this.state.profile.interests.length === 0 && !this.state.editMode && <ListGroup.Item tag={"div"} className={"experienceItem"}>No interests added.</ListGroup.Item>}
+
+                                            {this.state.profile.interests.map((interest) => {
+                                                console.log(interest);
+                                                return(
+                                                    <tr>
+                                                        <td>{interest.title}</td>
+                                                        <td>{interest.int_description}</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                            </tbody>
+                                        </Table>
+                                    </ListGroup.Item>
+                                    {this.state.editMode && <ListGroup.Item tag={"div"} className={"experienceItemAdd"}>
+                                        <div onClick={() => this.setState({showInterestsModal: true})} className={"addButton"}><img className={"addButton"} src={addButton}/></div>
+                                    </ListGroup.Item>}
                                 </Card.Text>
                             </Card.Body>
                         </Card>
@@ -302,6 +349,7 @@ class Profile extends  React.Component {
                 </div>
                 <PhotoModal onUploaded={this.getUserInfo} show={this.state.showPhotoModal} handleClose={this.handleClosePhoto}/>
                 <ExperienceModal show={this.state.showExperienceModal} handleClose={this.handleCloseExperience} setExperience={(experience) => this.setExperience(experience)}/>
+                <InterestsModal show={this.state.showInterestsModal} handleClose={this.handleCloseInterests} setExperience={(interests) => this.setInterests(interests)}/>
             </div>
         );
     }

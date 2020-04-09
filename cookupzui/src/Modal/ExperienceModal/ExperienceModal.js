@@ -12,20 +12,20 @@ export default function ExperienceModal(props){
     const [isInvalid, setIsInvalid] = useState(false);
 
     function validateInput(params){
-        return where.length > 0 && position.length>0
+        return where.length > 0 && position.length > 0;
     }
 
     function handleSubmit(e){
         e.preventDefault();
         if(!validateInput()){
             setIsInvalid(true);
-            setToastMessage('No fields can be left empty.')
+            setToastMessage('No fields can be left empty.');
             return;
         }
         const experience = {
             where:where,
             position: position
-        }
+        };
         props.setExperience(experience);
         setPosition('');
         setWhere('');

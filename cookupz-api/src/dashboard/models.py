@@ -40,3 +40,4 @@ class Experience(models.Model):
 class Interest(models.Model):
     profile = models.ForeignKey(Profile, on_delete = models.CASCADE, related_name='interests')
     title = models.TextField(default = None, blank=True, null=True)
+    int_description = models.TextField(default = None, blank=True, null=True)
