@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import UpdateAPIView
 from rest_framework import status
-from .models import Profile, Offer
-from .serializers import ProfileSerializer, OfferSerializer, UserDTOSerializer, OfferSerializerWithUser, ProfileSerializerUpdateDTO
+from .models import Profile, Offer, Experience
+from .serializers import ProfileSerializer, OfferSerializer, OfferSerializerWithUser, \
+     ProfileSerializerUpdateDTO, UserSerializerWithProfile, ExperienceSerializer
 from django.contrib.auth.models import User
 import os
 import cloudinary
@@ -51,10 +52,14 @@ class ProfileEditView(UpdateAPIView):
     serializer_class = ProfileSerializer
     lookup_field = 'id'
     def update(self, request, *args, **kwargs):
+        experience_serializer = ExperienceSerializer(data = request.data['experience'], many=True)
+        experience_serializer.is_valid(raise_exception=True)
         instance = self.get_object()
         instance.location = request.data['location']
         instance.phone_number = request.data['phone_number']
         instance.bio = request.data['bio']
+        for experience in experience_serializer.data :
+            Experience.objects.create(profile_id = instance.id, where = experience['where'], position = experience['position'])
         instance.save()
         serializer = self.get_serializer(instance)          
         return Response(data = serializer.data, status=status.HTTP_200_OK)
@@ -75,14 +80,9 @@ class OfferView(APIView):
             return Response(data = serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, username):
-        print(username)
         user = User.objects.filter(username = username)[0]
-        print(user.int_offers)
-        print(user.id)
         data = Offer.objects.all().exclude(user = user.id)
         serializer = OfferSerializerWithUser(data, many=True)
-        for offer in data:
-            print(offer.user_id)
         if(serializer.is_valid):
             return Response(data = serializer.data, status = status.HTTP_200_OK)
         else:

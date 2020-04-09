@@ -29,3 +29,14 @@ class Offer(models.Model):
     location = models.TextField(default=None, blank=True, null=True)
     tag = models.TextField(default=None, blank=True, null=True)
     
+
+class Experience(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experience')
+
+    where = models.TextField(default = None, blank=True, null=True)
+    position = models.TextField(default = None, blank=True, null=True)
+    how_long = models.TextField(default = None, blank=True, null=True)
+
+class Interest(models.Model):
+    profile = models.ForeignKey(Profile, on_delete = models.CASCADE, related_name='interests')
+    title = models.TextField(default = None, blank=True, null=True)

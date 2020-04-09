@@ -50,7 +50,12 @@ img{ max-width:100%;}
     float: left;
     padding: 0 0 0 15px;
     width: 88%;
+    display: flex;
+    flex-direction: row;
+    vertical-align: center;
 }
+
+
 
 .chat_people{ overflow:hidden; clear:both;}
 .chat_list {
@@ -118,13 +123,23 @@ img{ max-width:100%;}
     float: right;
     width: 46%;
 }
+textarea{
+    resize: none;
+}
 .input_msg_write input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
     color: #4c4c4c;
     font-size: 15px;
     min-height: 48px;
-    width: 100%;
+    display: flex;
+    text-align: center;
+    resize: none;
+}
+
+.write_msg{
+   width: 75%;
+    height: 100%;
 }
 
 .type_msg {border-top: 1px solid #c4c4c4;position: relative;}
@@ -136,10 +151,18 @@ img{ max-width:100%;}
     cursor: pointer;
     font-size: 17px;
     height: 33px;
-    position: absolute;
-    right: 0;
-    top: 11px;
     width: 33px;
+    right: 27%;
+    position: absolute;
+    bottom: 20%;
+}
+.infoButton{
+    position: absolute;
+    left: 85%;
+    bottom: 20%;
+    height: 39px;
+    font-size: 17px;
+    padding-bottom: 20px
 }
 .messaging {
     padding: 0 0 50px 0;

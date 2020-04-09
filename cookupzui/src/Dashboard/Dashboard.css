@@ -33,7 +33,7 @@
 
 .postWrapper .card-body{
     padding: 0;
-    max-width: 500px;
+    max-width: 800px;
 }
 
 .postWrapper{
@@ -56,7 +56,7 @@
 .upperPart{
     display: flex;
     flex-direction: row;
-    height: 60px;
+    height: 90px;
 }
 
 .name {
@@ -87,19 +87,28 @@
 
 .userProfilePicture{
     width: 75px;
-    height: 50px;
+    height: 75px;
 }
 
 
 .jumb{
-    width: 500px;
+    width: 800px;
     padding: 10px;
     margin-bottom: 0px;
+}
+
+.pendingWarning{
+    width: 200px;
+    height: 45px;
+    margin-bottom: 1px;
+    text-align: center;
 }
 
 .buttons{
     max-width: 100%;
     text-align: center;
+    display: flex;
+    justify-content: center;
     background-color: #e9ecef;
     padding-bottom: 7px;
 }

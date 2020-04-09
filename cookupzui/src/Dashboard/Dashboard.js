@@ -10,6 +10,8 @@ import Button from "react-bootstrap/Button";
 import checkTokenService from "../checkToken";
 import {Link, withRouter} from "react-router-dom";
 import InterestedModal from "../Modal/InterestedModal/InterestedModal";
+import {forEach} from "react-bootstrap/cjs/ElementChildren";
+import Alert from "react-bootstrap/Alert";
 
 
 
@@ -27,6 +29,8 @@ function Dashboard (props) {
                 setState(res.data);
                 setDataLoaded(true)
             })
+        }).catch(() => {
+            props.history.push('/');
         })
     }, []);
 
@@ -41,6 +45,19 @@ function Dashboard (props) {
             offer: item
         });
         setOfferSelected(true);
+    }
+
+    function interested(offer){
+        const username = localStorage.getItem("currentUsername");
+        console.log(offer.int_users.length)
+        for(let i = 0; i < offer.int_users.length; i++){
+            const otherUusername = offer.int_users[i].username
+            console.log(otherUusername)
+            if(username === otherUusername){
+                return true;
+            }
+        }
+        return false;
     }
     const wallpaper = require('../assets/holder.jpg');
     if(dataLoaded) {
@@ -89,7 +106,8 @@ function Dashboard (props) {
                                         </Jumbotron>
                                         <div className={"buttons"}>
                                             <div className={"button"}>
-                                                <Button onClick={() => openModal(item)} size="sm" variant="outline-secondary">I'm interested</Button>{' '}
+                                                {!interested(item) && <Button onClick={() => openModal(item)} size="sm" variant="outline-secondary">I'm interested</Button>}
+                                                {interested(item) &&   <Alert className={"pendingWarning"} variant={"warning"}>Pending</Alert>}
                                             </div>
                                         </div>
                                     </Card>

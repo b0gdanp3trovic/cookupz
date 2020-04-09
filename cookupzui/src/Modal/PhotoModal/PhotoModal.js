@@ -16,7 +16,7 @@ export default function PhotoModal(props) {
 
 
     let fileSelectedHandler = event => {
-        console.log(event.target.files[0])
+        console.log(event.target.files[0]);
         const file = event.target.files[0];
         setState({selectedFile: file});
         setPhotoSelected(true);

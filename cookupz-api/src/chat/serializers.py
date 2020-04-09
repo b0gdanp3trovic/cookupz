@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from users.serializers import UserSerializer
-from dashboard.serializers import OfferSerializer
+from dashboard.serializers import OfferSerializer, UserSerializerWithProfile
 from chat.models import Chat, Message
 
 class ChatSerializer(serializers.ModelSerializer):
@@ -18,7 +18,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
 class ChatSerializerWithMessages(serializers.ModelSerializer):
     messages = MessageSerializer(many = True, required= True)
-    participants = UserSerializer(many=True, required=True)
+    participants = UserSerializerWithProfile(many=True, required=True)
     class Meta:
         model = Chat
         fields = ['id', 'offer_id', 'participants', 'messages']

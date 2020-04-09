@@ -42,6 +42,8 @@ function Offer (props){
             axios.get("http://localhost:8000/dashboard/offer/" + localStorage.getItem("currentUsername"), param).then(res => {
                 editState(res.data)
             })
+        }).catch(() => {
+            props.history.push('/');
         })
     }, []);
 

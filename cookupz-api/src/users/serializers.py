@@ -25,6 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['email', 'first_name', 'last_name', 'username']
 
 
+
 class UserDTOSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

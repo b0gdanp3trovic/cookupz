@@ -11,6 +11,7 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {faPaperPlane} from '@fortawesome/free-regular-svg-icons'
 import {Web} from "@material-ui/icons";
 import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
 
 class Chat extends React.Component{
     constructor(props) {
@@ -29,7 +30,7 @@ class Chat extends React.Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.messagesEndRef){
-            this.messagesEndRef.scrollIntoView({behavior:"smooth"})
+            this.messagesEndRef.scrollIntoView()
         }
     }
 
@@ -43,8 +44,11 @@ class Chat extends React.Component{
             };
             axios.get("http://localhost:8000/chat/list/" + localStorage.getItem("currentUsername"), param).then(res => {
                 this.setState({chats: res.data});
+                console.log(res.data);
                 this.setState({dataLoaded: true});
             })
+        }).catch(err => {
+            this.props.history.push('/');
         })
     }
 
@@ -53,6 +57,14 @@ class Chat extends React.Component{
         let result =  chat.participants.filter(el => el.username !== username);
         if(result[0])
             return result[0].first_name + " " + result[0].last_name;
+        else return ""
+    }
+
+    getReceiverImage(chat){
+        const username = localStorage.getItem("currentUsername");
+        let result =  chat.participants.filter(el => el.username !== username);
+        if(result[0])
+            return result[0].profile.photo_url;
         else return ""
     }
 
@@ -89,12 +101,13 @@ class Chat extends React.Component{
                     return (
                         <div key={i} className="incoming_msg">
                             <div className="incoming_msg_img"><img
-                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil"/></div>
+                                src={this.getReceiverImage(this.state.selectedChat)}/></div>
                             <div className="received_msg">
                                 <div className="received_withd_msg" ref={(el) => this.messagesEndRef = el}>
                                     <p>{message.content}</p>
                                     <span className="time_date">{message.timestamp}</span></div>
                             </div>
+
                         </div>
                     )
                 }else{
@@ -185,13 +198,16 @@ class Chat extends React.Component{
                                                  }, this.click)}>
                                                 <div className="chat_people">
                                                     <div className="chat_img"><img
-                                                        src="https://ptetutorials.com/images/user-profile.png" alt="sunil"/>
+                                                        src={this.getReceiverImage(chat)}/>
                                                     </div>
                                                     <div className="chat_ib">
-                                                        <h5>{this.renderParticipant(chat)} <span className="chat_date"></span></h5>
-                                                        <p>{chat.messages[chat.messages.length-1] && chat.messages[chat.messages.length-1].content}</p>
+                                                        <div>
+                                                            <h5>{this.renderParticipant(chat)} <span className="chat_date"></span></h5>
+                                                            <p>{chat.messages[chat.messages.length-1] && chat.messages[chat.messages.length-1].content}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         )
                                     }, this)}
@@ -208,7 +224,7 @@ class Chat extends React.Component{
                                 </div>
                                 <div className="type_msg">
                                     <div className="input_msg_write">
-                                        <input value={this.state.typedMessage}
+                                        <textarea value={this.state.typedMessage}
                                                onChange={(e) => this.setState({typedMessage: e.target.value})}
                                                type="text" className="write_msg"
                                                placeholder="Type a message"
@@ -217,6 +233,7 @@ class Chat extends React.Component{
                                         />
                                         <button className="msg_send_btn" type="button" onClick={this.sendMessage}>
                                             <FontAwesomeIcon icon={["far", "paper-plane"]} aria-hidden="true"/></button>
+                                        <Button className={"infoButton"} variant="info">Invite</Button>{' '}
                                     </div>
                                 </div>
                             </div>

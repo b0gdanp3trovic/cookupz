@@ -12,6 +12,7 @@ import axios from "axios";
 import checkTokenService from "../../checkToken";
 import PhotoModal from "../../Modal/PhotoModal/PhotoModal";
 import {withRouter} from "react-router-dom";
+import ExperienceModal from "../../Modal/ExperienceModal/ExperienceModal";
 
 
 class Profile extends  React.Component {
@@ -19,7 +20,8 @@ class Profile extends  React.Component {
 
     constructor(props) {
         super(props);
-        this.handleClose = this.handleClose.bind(this);
+        this.handleClosePhoto = this.handleClosePhoto.bind(this);
+        this.handleCloseExperience = this.handleCloseExperience.bind(this);
         this.state = {
             userAuthenticated: false,
             token: localStorage.getItem("access"),
@@ -30,6 +32,7 @@ class Profile extends  React.Component {
             profileUsername: props.match.params.id,
             showPhotoModal: false,
             photoUploaded: false,
+            showExperienceModal: false,
             location: ''
         };
 
@@ -66,6 +69,16 @@ class Profile extends  React.Component {
                 }
             })
         })
+    }
+
+    setExperience(experience){
+        console.log(experience);
+        this.setState(prevState => ({
+            profile:{
+                ...prevState.profile,
+                experience: [...prevState.profile.experience, experience]
+            }
+        }))
     }
 
 
@@ -206,9 +219,13 @@ class Profile extends  React.Component {
     }
 
 
-    handleClose(){
+    handleClosePhoto(){
         this.setState({showPhotoModal: !this.state.showPhotoModal});
         console.log(this.state)
+    }
+
+    handleCloseExperience(){
+        this.setState({showExperienceModal: !this.state.showExperienceModal})
     }
 
     render() {
@@ -259,10 +276,15 @@ class Profile extends  React.Component {
                             <Card.Body className="cardBodyXp">
                                 <Card.Text>
                                     <ListGroup className={"experience"} variant="flush">
-                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Glavni kuvar at Arabika - 4 months</ListGroup.Item>
-                                        <ListGroup.Item tag={"div"} className={"experienceItem"}>Pica majstor at Has za čas - 6 months</ListGroup.Item>
+                                        {this.state.profile.experience.map(element => {
+                                            console.log(element);
+                                            return(
+                                                <ListGroup.Item tag={"div"} className={"experienceItem"}>{element.position + " at " + element.where}</ListGroup.Item>
+                                            )
+                                        })}
+                                        {this.state.profile.experience.length === 0 && !this.state.editMode && <ListGroup.Item tag={"div"} className={"experienceItem"}>No experience added.</ListGroup.Item>}
                                         {this.state.editMode && <ListGroup.Item tag={"div"} className={"experienceItemAdd"}>
-                                            <div className={"addButton"}><img className={"addButton"} src={addButton}/></div>
+                                            <div onClick={() => this.setState({showExperienceModal: true})} className={"addButton"}><img className={"addButton"} src={addButton}/></div>
                                         </ListGroup.Item>}
                                     </ListGroup>
                                 </Card.Text>
@@ -278,7 +300,8 @@ class Profile extends  React.Component {
                         </Card>
                     </div>
                 </div>
-                <PhotoModal onUploaded={this.getUserInfo} show={this.state.showPhotoModal} handleClose={this.handleClose}/>
+                <PhotoModal onUploaded={this.getUserInfo} show={this.state.showPhotoModal} handleClose={this.handleClosePhoto}/>
+                <ExperienceModal show={this.state.showExperienceModal} handleClose={this.handleCloseExperience} setExperience={(experience) => this.setExperience(experience)}/>
             </div>
         );
     }
